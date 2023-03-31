@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{attachfile}
+\usepackage{ulem}
+\usepackage{xcolor}
+
+\title{SE 3XA3: Development Plan\\TankWar}
+
+\author{Team \#212, Genius
+		\\Di Wu, 400117248, wud43 
+		\\Jiahao Zhou, 400082351, zhouj56 
+		\\Xinyu Huang, 400120376, huangx65
+}
+
+\date{}
+
+
+
+\begin{document}
+
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+30 January 2020 & Xinyu Huang, Di Wu, Jiahao Zhou & Create the first version of the Development Plan\\
+\textcolor{red}{03 April 2020} & \textcolor{red}{Xinyu Huang, Di Wu, Jiahao Zhou} & \textcolor{red}{Fixed the number of code lines, and add the user acceptance test into the proof of concept demonstration plan. The project review is added into the development plan.}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\maketitle
+
+\section{Team Meeting Plan}
+Team meetings would be hold three times a week, including two two-hour lab meeting and one outside class meeting. All team members will meet on the labs for two hours on Tuesday and Wednesday every week. The outside class meeting would be hold on Sunday around 2:00 pm to 4:00 pm in Thode library. As group leader, Xinyu Huang is in charged of meetings and have the responsibility to set up agenda for every meeting. As the meeting scribe, Di Wu is responsible to record meeting content as well as the decisions made in the meeting. Based on meeting content, the goal for next meeting would be decided at the end of meetings. Additionally, some task may be assigned to each group member in the meetings and they are expected to be done before next meeting. If the meeting schedule has conflict with the schedule of any team member, the meeting may be rescheduled to a suitable time. All team members are required to attend all meetings. If any team member has absence in a meeting, it is their responsibility to catch up the meeting content and complete their task in time.
+
+\section{Team Communication Plan}
+The team communication consist by mainly two parts including technical communication and instant message communication. Git will be used to update and reversion documents and code source files. Wechat is a instant message app on the phone. Any latest message will be posted on the Wechat group, so all the team members would receive the news imediatelly. Besides, Wechat would be used as the communication tool to discuss about the project process and the specific plans on daily basis.
+
+\section{Team Member Roles}
+Xinyu Huang: Xinyu will be the leader of the group. As a leader, Xinyu will be responsible for managing the progress of the project and work division. Apart from that, Xinyu is proficient on python, git, and Latex. Therefore, Xinyu will also contribute on programming, file transferring and documenting aspects as a developer.\\
+\\
+Jiahao Zhou: Jiahao will be the software tester and developer of the group. As a tester, Jiahao will be responsible for testing the bugs and errors in the software and debugging. Jiahao has strong skills on python and latex. So, Jiahao will contribute on software design, documenting, and coding.\\
+\\
+Di Wu: Di will be the scribe and software developer of the group. As a scribe, Di will be responsible for recording meeting content and the decision made during every meeting. Di Wu has professional skills on python and git. Hence, Di will contribute on programming, file transferring and documenting aspects too.
+
+\section{Git Workflow Plan}
+We will use both the centralized plan and the featured branch for our project because all three team members are going to develop it together. For some features may need two of us work together, they can form a sub team and merge to the master branch after all the works are done. Also, for some features only need one person, the developer can create a featured branch so that he can finish it on his own branch and finally merge to the master branch. During the work, labels are going to be used to record the issues in the code and notification to other members, and the priorities will be identified as well. Milestones are going to be used to record the progress of our project, we will follow the milestones to make sure everything is well completed.
+
+\section{Proof of Concept Demonstration Plan}
+The risks and difficulties in this project include implementing complex designs and testing. It may be difficult to add the new map editor function into the TankWar due to the complexity of the map editor design. The map editor requires developers to design a user interface to create maps and a mean to saving map in the local machine. All group members did not have experience to construct a similar game map editor before. It required developers to learn amount of design knowledge and coding implementation skill in pygame. Therefore, the map editor function may have some difficulties or even risks during the development. In the worst case, the map editor may not be fully functional. To concur the difficulty, all group member are decided to learn the design knowledge and the pygame skills. Meanwhile, the if the map editor is too hard to implement, the map editor may be implemented without a user interface by simply creating a map outside of the game in a text file which the TankWar game can generate a map base on the file. Moreover, testing will be a part of the difficulty as well. The original game has more \textcolor{red}{than} 1000 lines' code and now we are going to reconstuct the code and add even more features, which means that the new game would contain a lot of functions and become more complex. Therefore, to cover all the functions and branches in the test plan will be a challenge for us. To deal with this problem, we are going to spend more time on the testing process. Meanwhile, we will use unit test to test the functions one by one and try to cover all the branches to make sure the test is complete and reasonable.\\
+\textcolor{red}{As our project is a game, we will design a user acceptance as well. We will invite 50 sample players, who are above 12 years old, to play our game and collect the feedback to see if the user acceptance is more than 80 percent}
+
+\section{Technology}
+In our project, python will be used as the main programming language. Pygame will also be needed for implementing the TankWar game. Sublime Text will be used as our python IDE. For the testing framework, python unittest will be our first choice because it is easy to use and quite efficient. Additionally, the document generator been chosen is doxygen due to the common experience gained from the previous course.
+\section{Coding Style}
+Google python coding style will be used in this project. It is believed that a good coding standard will help developers understand each other's code. Also, the performance could be guaranteed based on a good coding standard. 
+
+\section{Project Schedule}
+TankWarSchedule.pdf
+\attachfile{../../ProjectSchedule/TankWarSchedule.pdf}\\
+TankWarSchedule.gan
+\attachfile{../../ProjectSchedule/TankWarSchedule.gan}
+
+\section{Project Review}
+\textcolor{red}{Basically, the development plan was well followed during this semester except the meeting plan, all the meetings from Mar 18th are changed to online instead of at Thode library due to the virus. Also, the project is well completed at end of term. The three expected new features are added to the game, and the expected requirements are met. After fully testing the project, the new game is now working perfectly.}
+\end{document}

@@ -1,0 +1,1765 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage[section]{placeins}
+\usepackage[unicode]{hyperref}
+\usepackage[english]{babel} 
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{ulem}
+
+\DeclareRobustCommand{\hsout}[1]{\texorpdfstring{\sout{#1}}{#1}}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Module Interface Specification\\TankWar}
+
+\author{Team \#212, Genius
+		\\Di Wu, 400117248, wud43 
+		\\Jiahao Zhou, 400082351, zhouj56 
+		\\Xinyu Huang, 400120376, huangx65
+}
+
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+13 March 2020 & 1.0 & Create the first version of the MIS\\
+\textcolor{red}{4 April 2020} & \textcolor{red}{2.0} & \textcolor{red}{Exchange some modules between Behaviour-Hiding Module and Software Decision Module. Make changes based on the modules we had improved after finishing the first version of MIS, which includes adding new modules, deleting modules, adding new functions along with its transition and exception, and deleting functions that are no longer needed in our project. }\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\section{Module Hierarchy}
+\begin{table}[h!]
+\centering
+\begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.3\textwidth}}
+\toprule
+\textbf{Level 1} & \textbf{Level 2} & \textbf{Module Label}\\
+\midrule
+
+{Hardware-Hiding Module} & & \textcolor{red}{M1} \\
+\midrule
+
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & myTankControl Module & \textcolor{red}{M2}\\
+& Screen Module & \textcolor{red}{M3}\\
+& display Module & \textcolor{red}{M4}\\
+& PvsE Module & \textcolor{red}{M5}\\
+& PvsP Module & \textcolor{red}{M6}\\
+& mapEditing Module & \textcolor{red}{M7}\\
+& \textcolor{red}{\sout{Map Module}}\\
+& main Module & \textcolor{red}{M8}\\
+& \textcolor{red}{highSpeedTank Module} & \textcolor{red}{M13}\\
+& \textcolor{red}{doubleLifeTank Module} & \textcolor{red}{M14}\\
+& \textcolor{red}{fastBulletTank Module} & \textcolor{red}{M15}\\
+& \textcolor{red}{MapEditTank Module} & \textcolor{red}{M18}\\
+& \textcolor{red}{enemyTank Module} & \textcolor{red}{M16}\\
+
+\midrule
+
+\multirow{3}{0.3\textwidth}{Software Decision Module} & bullet Module & \textcolor{red}{M9}\\
+& food Module & \textcolor{red}{M10}\\
+& decTime Module & \textcolor{red}{M11}\\
+& myTank Module & \textcolor{red}{M12}\\
+& \textcolor{red}{\sout{highSpeedTank Module}}\\
+& \textcolor{red}{\sout{doubleLifeTank Module}}\\
+& \textcolor{red}{\sout{fastBulletTank Module}}\\
+& \textcolor{red}{\sout{enemyTank Module}}\\
+& \textcolor{red}{\sout{positionType Module}}\\
+& \textcolor{red}{Map Module} & \textcolor{red}{M17}\\
+& wall Module & \textcolor{red}{M19}\\
+\bottomrule
+
+\end{tabular}
+\caption{Module Hierarchy}
+\label{TblMH}
+\end{table}
+
+
+\section{MIS of Bullet Module}
+        \subsection{Template Module}
+        Bullet
+        \subsection{Uses}
+        pygame
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+			
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+			new Bullet & - & - & -\\ \hline
+			setBulletSpeed & $\mathbb{Z}$ & - & -\\ \hline
+			setBulletLife & $\mathbb{B}$ & - & -\\ \hline
+			setBulletStrong & $\mathbb{B}$ & - & -\\ \hline
+			changeImage & $\mathbb{Z}$,$\mathbb{Z}$ & - & out of range\\ \hline
+			move & - & - & -\\ \hline
+			
+		\end{tabular}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		dir\_x : $\mathbb{Z}$\\
+		dir\_y : $\mathbb{Z}$\\
+		speed  : $\mathbb{Z}$\\
+		life   : $\mathbb{B}$\\
+		strong : $\mathbb{B}$\\
+		bullet : pygame loading image.
+		
+		\subsubsection{State Invariant}
+		(-1 <= dir\_x <= 1) \& (-1 <= dir\_x <= 1)
+		\subsection{Environment Variables}
+		bullet\_up : pygame loading image.\\
+		bullet\_down : pygame loading image.\\
+		bullet\_left : pygame loading image.\\
+		bullet\_right : pygame loading image.
+		\subsubsection{Assumptions \& Design Decisions}
+		dir\_x and dir\_y are both integers from -1 to 1.
+		\subsubsection{Access Routine Semantics}
+		Bullet():
+		\begin{itemize}
+		\item transition:\\dir\_x, dir \_y, speed, life, strong, bullet are initialized to 0, 0, 6, False, False, bullet.up, and the information about the bullet's position will stored into rect.left and rect.right, which are 3 + 12 * 24, 3 + 24 * 24, respectively.
+		
+		\item excpetion:\\ None.
+		\end{itemize}
+	    setBulletSpeed(speed):
+	    \begin{itemize}
+	    \item transition:\\The speed of the bullet is changed to the input value.
+	    
+	    \item exception:\\ None
+	    \end{itemize}
+	    setBulletLife(life):
+	    \begin{itemize}
+	    \item transition:\\ The life of the bullet is changed to the input value.
+	    \item exception:\\None.
+	    \end{itemize}
+
+	    changeImage(dir\_x, dir\_y):
+	    \begin{itemize}
+	    \item transition:\\ the direction of the bullet is changed to the input value, and bullet's images will be loaded continuously to show the moving in that direction.
+	    \item exception:\\(|dir\_x| > 1 or |dir\_y| > 1 will be a out of range exception)
+	    \end{itemize}
+	    move():
+	    \begin{itemize}
+	    \item transition:\\ The position of the bullet will be changed continuously in a direction, and it will the life's value will be changed to False if the bullet hit something, such as a tank, wall or the boundary of the map.
+	   \item exception: \\None.
+	    \end{itemize}
+		
+\section{MIS of Decrease Time Module}
+        \subsection{Template Module}
+        decTime
+        \subsection{Uses}
+        N/A
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+			
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+			new decTime & $\mathbb{Z}$ & - & -\\ \hline
+			subTime & - & $\mathbb{Z}$ & -\\ \hline
+
+			
+		\end{tabular}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		sec : $\mathbb{Z}$\\
+		hour : $\mathbb{Z}$\\
+		minute : $\mathbb{Z}$
+		
+		\subsubsection{State Invariant}
+		sec >= 0 \& minute >= 0 \& hour >= 0
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		N/A
+		\subsubsection{Access Routine Semantics}
+		decTime(totalTime):
+		\begin{itemize}
+		\item transition:\\ The value of sec is changed to the input totalTime, and the hour is set to sec/3600, then the sec is changed to sec\% 3600, and the minute is set to sec/60, finally the value of sec is set to sec \% 60.
+		
+		\item exception:\\ None.
+		\end{itemize}
+	    subTime():
+	    \begin{itemize}
+	    \item transition:\\ If (sec > 0), sec = sec - 1. If (sec == 0 and minute > 0), minute -= 1 and sec is changed to 59. If (sec == 0 and hour > 0), hour -= 1 and the sec is changed to 59. If sec. minute, and hour are all zeros, the game will end.
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	        
+\section{MIS of DoubleLife Tank Module}
+        \subsection{Template Module}
+        DoubleLifeTank
+        \subsection{Uses}
+        pygame, myTank, bullet, positionType
+        \subsection{Inherit}
+        MyTank
+        
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+			
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+			new DoubleLifeTank & CoordinateT & - & -\\ \hline
+			bulletproof\_start & - & - & -\\ \hline
+			bulletproof\_end & - & - & -\\ \hline
+			getBulletProof & - & $\mathbb{B}$ & -\\ \hline
+			
+		\end{tabular}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		life : $\mathbb{Z}$\\
+		bulletProof : $\mathbb{B}$\\
+		ID : $\mathbb{Z}$\\
+		tank : pygame loading image\\
+		tank\_R0 : subsurface of pygame loading image\\
+		tank\_R1 : subsurface of pygame loading image\\
+		rect : rectangle object of pygame loading image\\
+		rect.left : $\mathbb{Z}$\\
+		rect.top ; $\mathbb{Z}$
+		
+		\subsubsection{State Invariant}
+		N/A
+		\subsubsection{Environement Variables}
+		imagePath : path for a image
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The double life tank class inherit my tank class. The double life tank has all the features of the my tank class, like level, move, shoot.
+		
+		\item The double life tanks can activate their ultimate skill, bullet proof. It can block the bullets for 3 seconds and this can be activated 3 times in a game.
+		
+		\item The double life tank has 6 life in a game.
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+	    doubleLifeTank(myTank.MyTank):
+	    \begin{itemize}
+	    \item transition:\\
+	    The tank's life, bulletProof, and ID are initialized to be 2, False, and 1, respectively. Load the image from imagePath to tank, and tank\_R0, tank\_R1 are set to be different parts of the image loaded, which represent the different conditions during moving. The rect used the method in pygame to get the tank\_R0's position and the position information will are stored in rect.left and rect.top.
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    bulletproof\_start():
+	    \begin{itemize}
+	    \item transition:\\ The value of bulletproof is set to be True.
+	    \item exception:\\ None.
+	    \end{itemize}
+	    bulletproof\_end():
+	    \begin{itemize}
+	    \item transition:\\The value of bulletproof is set to be False.
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    getBulletProof():
+	    \begin{itemize}
+	    \item output:\\return the value of bulletproof.
+	    \item exception:\\None.
+	    \end{itemize}
+	    
+	    
+	    
+\section{MIS of Enemy Tank Module}
+        \subsection{Template Module}
+        EnemyTank
+        \subsection{Uses}
+        pygame, random, bullet
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+        N/A
+		\subsubsection{Exported Access Programs}
+		
+		\begin{table}[!htbp]
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			Name & In & Out & Exceptions \\ \hline
+			new EnemyTank & $\mathbb{Z}$, $\mathbb{Z}$, $\mathbb{B}$ & - & - \\ \hline
+			shoot & - & - & |dir\_x| > 1 || |dir\_y| > 1 \\ \hline
+			move & set of Brick, set of Iron & - & - \\ \hline
+		\end{tabular}
+	\end{table}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		flash : $\mathbb{B}$\\
+		times : $\mathbb{Z}$\\
+		kind : $\mathbb{Z}$\\
+		enemy\_x\_0 : pygame loading image\\
+		enemy\_x\_3 : pygame loading image\\
+		enemy\_3\_0 : pygame loading image\\
+		enemy\_3\_2 : pygame loading image\\
+		isred : $\mathbb{B}$\\
+		tank : pygame loading image\\
+		x : $\mathbb{Z}$\\
+		tank\_R0 : subsurface of pygame loading image\\
+		tank\_R1 : subsurface of pygame loading image\\
+		rect : rectangle object of pygame loading image\\
+		rect.left : $\mathbb{Z}$\\
+		rect.top : $\mathbb{Z}$\\
+		speed : $\mathbb{Z}$\\
+		dir\_x : $\mathbb{Z}$\\
+		dir \_y : $\mathbb{Z}$\\
+		life : $\mathbb{Z}$\\
+		bulletNotCooling : $\mathbb{B}$\\
+		bullet : Bullet()\\
+		dirChange : $\mathbb{B}$
+		\subsubsection{State Invariant}
+	    N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		N/A
+		\subsubsection{Access Routine Semantics}
+        EnemyTank(x, kind,  isred, y):
+        \begin{itemize}
+        \item transition:\\ Flash and time is set to be False and 90, respectively. and the second input value is stored into the variable kind. If kind is not None, kind is set to be a integer randomly picked from [1,2,3,4]. Depending on the value kind, different images are stored into enemy\_x\_0 and enemy\_x\_3, and two images are stored into enemy\_3\_0, enemy\_3\_2 as well. If value of isred is not None, a random value from (True, False, False, False, False) is stored into it, and then if the value of isred is True, tank's value will set to enemy\_x\_3, otherwise it will be enemy\_x\_0. The first input value is assigned to the variable x, and if x is not None, a random value from [1,2,3] will be stored into x, and then (x = x -1). different parts of the tank image will be stored into tank\_R0 and tank\_R1, and the position information will be stored into rect.left and rect.top. The speed, dir\_x, dir\_y, bulletNotCooling, bullet, dirChange are set to be 1, 0, 1, 1, True, Bullet(), False,  respectively. Finally, if kind equals to 2, the speed will be set as 3, and if kind is 3, the life will be set as 3.
+        \item exception:\\None.
+        \end{itemize}
+        shoot():
+        \begin{itemize}
+        \item  The life of the enemyTank's bullet is changed to True, and the image loaded depending on the direction of the bullet. The images are loaded continuously to represent to moving of the bullet in a direction.
+        \item exception:\\ (|dir\_x| > 1) or (|dir\_y| > 1)
+        \end{itemize}
+        move(tankGroup, brickGroup, ironGroup):
+        \begin{itemize}
+        \item transition:\\ The rect value of the tank will be changed depending on the tank's direction and speed, and different subsurface of the tank image will be loaded tank\_R1, and tank\_R0 depending on the tank's moving direction. When the tank touches something, such as the other tanks, wall, or the boundary, a new random direction will be set.
+        \item exception:\\None
+        \end{itemize}
+\section{MIS of Fast Bullet Tank Subclass Module}
+        \subsection{Template Module}
+        FastBulletTank
+        
+        \subsection{Inherit}
+        MyTank
+        
+        \subsection{Uses}
+        Bullet, myTank, postitionType
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		
+	\begin{tabular}[pos]{|c|c|c|c|}
+	\hline
+	\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+	\hline
+	new FastBulletTank & CoordinateT & - & -\\ 
+	\hline
+	doubleBullets & - & - & -\\ 
+	\hline
+					
+	\end{tabular}		
+		
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		bullet: Bullet\\
+		bullet2: Bullet\\
+		ID : $\mathbb{Z}$\\
+		tank : pygame loading image\\
+		tank\_R0 : subsurface of pygame loading image\\
+		tank\_R1 : subsuface of pygame loading image\\
+		rect : rectangle object of pygame loading image\\
+		rect.left : $\mathbb{Z}$\\
+		rect.top : $\mathbb{Z}$
+		
+		\subsubsection{State Invariant}
+		N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The fast bullet tank class inherit my tank class. The fast bullet tank has all the features of the my tank class, like level, move, shoot.
+		
+		\item The fast bullet tanks can activate their ultimate skill, double bullet. It can shoot double bullets 3 times.
+		
+		\item The fast bullet tanks have faster bullet than other tanks.
+		\end{itemize}
+		
+		\subsubsection{Access Routine Semantics}
+		FastBulletTank(coordinate):
+		\begin{itemize}
+		\item transition: \\speed of bullet1 changed to 10, ID of bullet 1 is changed to 3. The image of the tank is stored into tank, and different parts of the subsurface are loaded to tank\_R0 and tank\_R1. rect.left and rect.top are changed to (3 + 24 * coordinate.x) and (3 + 24 * coordinate), respectively.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        doubleBullet():
+		\begin{itemize}
+		\item transition: life of bullet1  and bullet2 changed to True. According to the tank direction,  changes the image(changeImage(int, int)) of bullet1 and bullet2. According to the tank level, changes the speed of the bullet1 and bullet2.
+		
+		\item exception: None.
+        \end{itemize}
+
+\section{MIS of Food Module}
+        \subsection{Template Module}
+        food
+        \subsection{Uses}
+        pygame\\
+        random
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{table}[!htbp]
+				\begin{tabular}{|c|c|c|c|}
+					\hline
+					Name & In & Out & Exceptions \\ \hline
+					new Food & - & - & - \\ \hline
+					change & - & - & - \\ \hline
+				\end{tabular}
+			\end{table}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		food\_boom: pygame loading image\\
+		food\_clock: pygame loading image\\
+		food\_gun: pygame loading image\\
+		food\_iron: pygame loading image\\
+		food\_star: pygame loading image\\
+		image: pygame loading image\\
+		kind: $\mathbb{Z}$\\
+		life: $\mathbb{B}$\\
+		rect: rectangle object of pygame loading image\\
+		rect.left: $\mathbb{Z}$\\
+		rect.top: $\mathbb{Z}$
+		\subsubsection{State Invariant}
+		1 <= kind <= 5\\
+		100 <= rect.left <= 500\\
+		100 <= rect.top: <= 500
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The food module is used to store the image of each food and random generate one of the food.
+		
+		\item The food object shall have 5 different kinds of buffs. The boom can destroy all enemy tank. The clock can pause all enemy tanks. The gun can make the bullets of the tank strong. The iron can add iron walls around the home. The star can upgrade the tank.
+		
+		\item The position of the food buffs will be random on the screen.
+		
+		\item The possibility of getting each food buff are equal.
+		
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+        Food():
+		\begin{itemize}
+		\item transition: \\
+		The program should use pygame to load the image of the five food buff and store into the state variable food\_boom, food\_clock, food\_gun, food\_iron, food\_star respectively. Then, the state variable kind will be assigned randomly among 1 to 5. The state variable image will store one of the image of the 5 food buffs determined by the state variable kind. Then, the state variable rect will be assigned with the rectangle object of the state variable image, and the position state variable rect.left and rect.top would be assigned with a random integer from 100 to 500. The state variable life would be set as False.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        change():
+		\begin{itemize}
+		\item transition: \\
+		The state variable kind will be assigned randomly among 1 to 5. The state variable image will store one of the image of the 5 food buffs determined by the state variable kind. The position state variable rect.left and rect.top would be updated with a random integer from 100 to 500. The state variable life would be set as True.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        
+\section{MIS of High Speed Tank Subclass Module}
+        \subsection{Template Module}
+        highSpeedTank
+        
+        \subsection{Inherit}
+        MyTank
+        
+        \subsection{Uses}
+        pygame\\
+        bullet\\
+        positionType
+        
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+	\begin{tabular}[pos]{|c|c|c|c|}
+	\hline
+	\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+	\hline
+	new highSpeedTank & CoordinateT & - & -\\ 
+	\hline
+	leap\_start & - & - & -\\ 
+	\hline
+	leap\_end & - & - & -\\ 
+	\hline
+					
+	\end{tabular}			
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		speed: $\mathbb{Z}$\\
+		ID: $\mathbb{Z}$\\
+		tank: pygame loading image\\
+		tank\_R0: subsurface of pygame loading image\\
+		tank\_R1: subsurface of pygame loading image\\
+		rect: rectangle object of pygame loading image\\
+		rect.left: $\mathbb{Z}$\\
+		rect.top: $\mathbb{Z}$
+
+		\subsubsection{State Invariant}
+		ID = 2
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The high speed tank class is inherited from myTank class, so it has all the operations and features of the super call. 
+		
+		\item The high speed tank would have a ultimate skill called leap, which can boost the speed of the tank.
+		
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+        highSpeedTank(coordinate):
+		\begin{itemize}
+		\item transition: \\
+		The program should set the state variable ID as 2. Then, it should use pygame to load the image of the high speed tank and store into the state variable tank.The state variable tank\_R0, and tank\_R1 will use the subsurface of the state variable to abstract two moving stage images. Then, the state variable rect will be assigned with the rectangle object of the state variable tank, and the position state variable rect.left and rect.top would be assigned by the coordinate.x and coordinate.y respectively.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        leap\_start():
+		\begin{itemize}
+		\item transition: \\
+		The function would increase the state variable speed by 3.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        leap\_end():
+		\begin{itemize}
+		\item transition: \\
+		The function would set the speed to original speed.
+		
+		\item exception: None.
+        \end{itemize}
+        
+\section{MIS of Map Module}
+        \subsection{Template Module}
+        Map
+        \subsection{Uses}
+        pygame
+        wall
+        postionType
+        typing
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		\textcolor{red}{CoordinateT: NameTuple of }
+		\textcolor{red}{\{x: int, y: int\}}
+		
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					new Map & - & - & -\\ \hline
+					addBrick & CoordinateT & - & -\\ \hline
+					addIron & CoordinateT & - & -\\ \hline
+					addHome & CoordinateT & - & -\\ \hline
+					loadBrickIron & string & - & -\\ \hline
+					saveMap & string & - & -\\ \hline
+					new PVEMap & - & - & -\\ \hline
+					loadPVEMap & string & - & -\\ \hline
+					new PVPMap & - & - & -\\ \hline
+					loadPVPMap & string & - & -\\ \hline
+					\textcolor{red}{CoordinateT} & \textcolor{red}{NameTuple} & \textcolor{red}{-} & \textcolor{red}{-}\\ \hline
+					
+				\end{tabular}
+				
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		brickGroup: pygame sprite group\\
+		ironGroup: pygame sprite group\\
+		homeGroup: pygame sprite group
+		
+		\subsubsection{State Invariant}
+		None
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The Map class is designed as the super class which contains all date about the position of the bricks, irons, homes in the map.
+		
+		\item The PVEMap is designed as the subclass of the Map class.
+		
+		\item The PVPMap is designed as the subclass of the Map class.
+		\end{itemize}
+		
+		\subsubsection{Access Routine Semantics}
+		Map():
+		\begin{itemize}
+		\item transition: \\
+		The function would initialize the Map object. The state variables brickGroup, ironGroup, homeGroup would be assigned by an empty pygame sprite group.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        addBrick(coordinate):
+		\begin{itemize}
+		\item transition: \\
+		The function would create a Brick() object. Them, it uses coordinate.x and coordinate.y to determine the position of the brick on the screen. After the brick setting up, the Brick object will be added into the state variable brickGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        addIron(coordinate):
+		\begin{itemize}
+		\item transition: \\
+		The function would create a Iron() object. Them, it uses coordinate.x and coordinate.y to determine the position of the iron on the screen. After the iron setting up, the Iron object will be added into the state variable ironGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        addHome(coordinate):
+		\begin{itemize}
+		\item transition: \\
+		The function would create a Home() object. Them, it uses coordinate.x and coordinate.y to determine the position of the home on the screen. After the home setting up, the Home object will be added into the state variable homeGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        loadBrickIron(path):
+		\begin{itemize}
+		\item transition: \\
+		The function would read the map storing file according to the path. It can read the format of the map storing file as the next function saveMap() generated. According to the coordinates stored in the file, it should create bricks as well as irons object, and add them into the state variable brickGroup and homeGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        saveMap(path):
+		\begin{itemize}
+		\item transition: \\
+		The function should save all the coordinates of the bricks and irons in the state variable brickGroup and homeGroup into the following format.\\
+		\\
+		Brick:\\
+		4 2\\
+		4 3\\
+		Iron:\\
+		0 2\\
+		0 3\\
+		Number of Brick:\\
+		2\\
+		Number of Iron:\\
+		2\\
+		\\
+		First row is "Brick:". Each following row represents a coordinate of a brick in the map. The left integer is x coordinate and the right integer is y coordinate in a row. After all bricks in the state variable brickGroup is written into the map, the iron would follow the same format start with 'Iron:' in the next row. Then, the coordinates of the iron in the ironGroup is written into the file. After that, the 'Number of Brick:' is written into the file and the next row is the number of the bricks in the brickGroup in the map. Then, the 'Number of Iron:' is written into the file and the next row is the number of the irons in the ironGroup in the map.
+		\item exception: None.
+        \end{itemize}
+        
+        PVEMap():
+		\begin{itemize}
+		\item transition: \\
+		PVEMap class is inherited from Map class. The function would initialize the PVEMap object. The state variables brickGroup, ironGroup, homeGroup would be assigned by an empty pygame sprite group.
+		
+		\item exception: None.
+        \end{itemize}
+        loadPVEMap(path):
+		\begin{itemize}
+		\item transition: \\
+		The function would read the map storing file according to the path. It can read the format of the map storing file as the function saveMap() generated. According to the coordinates stored in the file, it should create bricks as well as irons object, and add them into the state variable brickGroup and homeGroup. Moreover, it should also generate Home object with CoordinateT(12,24) to place the home in the middle of the bottom of the map and add the home into the state variable homeGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        PVPMap():
+		\begin{itemize}
+		\item transition: \\
+		PVPMap class is inherited from Map class. The function would initialize the PVPMap object. The state variables brickGroup, ironGroup, homeGroup would be assigned by an empty pygame sprite group.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        
+        loadPVPMap(path):
+		\begin{itemize}
+		\item transition: \\
+		The function would read the map storing file according to the path. It can read the format of the map storing file as the function saveMap() generated. According to the coordinates stored in the file, it should create bricks as well as irons object, and add them into the state variable brickGroup and homeGroup. Moreover, it should also generate 2 Home objects with CoordinateT(0,12) as well as CoordinateT(24,12) to place the homes in the middle of the left and right boundary of the map and add the home into the state variable homeGroup.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        \textcolor{red}{CoordinateT(coordinate):}
+		\begin{itemize}
+		\item \textcolor{red}{transition: \\}
+		\textcolor{red}{The function would create a position format which saves the coordinate based on the input.}
+		
+		\item \textcolor{red}{exception: None.}
+        \end{itemize}
+        
+				
+\section{MIS of My Tank Superclass Module}
+        \subsection{Template Module}
+        MyTank
+        \subsection{Uses}
+        Pygame
+        bullet
+        positionType
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					New myTank & CoordinateT & - & - \\ \hline
+					shoot & - & - & -\\ \hline
+					levelUp & - & - & -\\ \hline
+					levelDown & - & - & -\\ \hline
+					moveUp & set of Tank, set of Brick, set of Iron & $\mathbb{B}$ & -\\ \hline
+					moveDown & set of Tank, set of Brick, set of Iron & $\mathbb{B}$ & -\\ \hline
+					moveLeft & set of Tank, set of Brick, set of Iron & $\mathbb{B}$ & -\\ \hline
+					moveRight & set of Tank, set of Brick, set of Iron & $\mathbb{B}$ & -\\ \hline
+                    setSpeed & $\mathbb{Z}$ & - & -\\ \hline
+				\end{tabular}
+				
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		life: $\mathbb{Z}$\\
+		level: $\mathbb{Z}$\\
+	    speed: $\mathbb{Z}$\\
+		bullet: Bullet object\\
+		bulletNotCooling: $\mathbb{B}$\\
+		tank: pygame loading image\\
+		tank\_R0: subsurface of pygame loading image\\
+		tank\_R1: subsurface of pygame loading image\\
+		rect: rectangle object of pygame loading image\\
+		rect.left: $\mathbb{Z}$\\
+		rect.top: $\mathbb{Z}$\\
+		dir\_x: $\mathbb{Z}$\\
+		dir\_y: $\mathbb{Z}$\\
+		
+		\subsubsection{State Invariant}
+		level = {$level  \in {\mathbb{Z} | 0 \leq level \leq 2 }$}\\
+		dir\_x = {$level  \in {\mathbb{Z} | -1 \leq dir\_x \leq 1 }$}\\
+		dir\_y = {$level  \in {\mathbb{Z} | -1 \leq dir\_x \leq 1 }$}
+		
+		\subsubsection{Environmental Variable}
+		Tank.png: png picture. The Tank.png is the picture containing the image of tanks moving towards up, down, left, right in two phases moving or stop respectively.\\
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item MyTank is a super class which represents the tank object.
+		
+		\item A MyTank object should have the methods to move towards up, down, left, right, to level up as well as down, and to shoot bullets as the basic functionalities of a tank. 
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+        MyTank():
+		\begin{itemize}
+		\item transition: \\
+		The function would initialize the MyTank object. It should initialise the state variable life and level to 1. It should initialise the state variable speed to 3. It should initialise the state variable bullet with a Bullet() object and bulletNotCooling with True. It should use pygame to load the image 'Tank.png' and store into the state variable tank.The state variable tank\_R0, and tank\_R1 will use the subsurface of the state variable to abstract two moving stage images. Then, the state variable rect will be assigned with the rectangle object of the state variable tank, and the position state variable rect.left and rect.top would be assigned by the coordinate.x and coordinate.y respectively. The state variable dir\_x and dir\_y are initialized by assigning 0 and -1 respectively. 
+		
+		\item exception: None.
+        \end{itemize}
+        shoot():
+		\begin{itemize}
+		\item transition: \\
+		The function would set the state variable bullet life to be true by bullet.setBulletLife(True) and change the direction of image of the bullet by changeImage(self.dir\_x, self.dir\_y). While, the function also change the position of the bullet according to the shooting direction. Based on the level of the tank, the bullet speed and strong variable should be set to the corresponding value. Level 1 tank would have speed 16 bullet. Level 1 tank would have speed 16 bullet. Level 2 tank would have speed 16 bullet with bullet strong property True.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        levelUp():
+		\begin{itemize}
+		\item transition: \\
+		If the level is less than 2, the level of the tank will increase by 1.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        levelDown():
+		\begin{itemize}
+		\item transition: \\
+		If the level is greater than 0, the level of the tank will decrease by 1. If the level is 0, the level is remaining unchanged.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        moveUp(tankGroup, brickGroup, ironGroup):
+		\begin{itemize}
+		\item output: \\
+		The tank object shall move toward up by using state variable rect.move() function to move the object. If there are other objects on the way up like brick, iron, other tanks in the brickGroup, ironGroup, tankGroup, the tank will be blocked by these objects. If the tank is moving without blocking, the function will return True. If the tank is moving with blocking, the function will return False.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        moveDown(tankGroup, brickGroup, ironGroup):
+		\begin{itemize}
+		\item output: \\
+		The tank object shall move toward down by using state variable rect.move() function to move the object. If there are other objects on the way down like brick, iron, other tanks in the brickGroup, ironGroup, tankGroup, the tank will be blocked by these objects. If the tank is moving without blocking, the function will return True. If the tank is moving with blocking, the function will return False.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        moveLeft(tankGroup, brickGroup, ironGroup):
+		\begin{itemize}
+		\item output: \\
+		The tank object shall move toward left by using state variable rect.move() function to move the object. If there are other objects on the way left like brick, iron, other tanks in the brickGroup, ironGroup, tankGroup, the tank will be blocked by these objects. If the tank is moving without blocking, the function will return True. If the tank is moving with blocking, the function will return False.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        moveRight(tankGroup, brickGroup, ironGroup):
+		\begin{itemize}
+		\item output: \\
+		The tank object shall move toward right by using state variable rect.move() function to move the object. If there are other objects on the way right like brick, iron, other tanks in the brickGroup, ironGroup, tankGroup, the tank will be blocked by these objects. If the tank is moving without blocking, the function will return True. If the tank is moving with blocking, the function will return False.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        setSpeed(speed):
+		\begin{itemize}
+		\item transition: \\
+		The state variable speed is assigned by the input speed.
+		
+		\item exception: None.
+        \end{itemize}
+        
+
+\section{MIS of My Tank Control Module}
+        \subsection{Template Module}
+        myTankControl
+        \subsection{Uses}
+        Pygame
+        myTank
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					& pygame loading audio, pygame key press,  &  &  \\ 
+                    operatePlayer1 & $\mathbb{Z}$, $\mathbb{Z}$, MyTank, pygame sprite group of MyTanks,  & - & - \\ 
+                    & pygame sprite group of Bricks,  &  &  \\ 
+                    & pygame sprite group of Irons, $\mathbb{B}$ &  &  \\ \hline
+                    
+					& pygame loading audio, pygame key press,  &  &  \\ 
+                    operatePlayer2 & $\mathbb{Z}$, $\mathbb{Z}$, MyTank, pygame sprite group of MyTanks,  & - & - \\ 
+                    & pygame sprite group of Bricks,  &  &  \\ 
+                    & pygame sprite group of Irons, $\mathbb{B}$ &  &  \\ \hline
+                    
+                    
+                    & \textcolor{red}{pygame key press, moving} &  &  \\ 
+                    \textcolor{red}{operatePlayerME} & \textcolor{red}{movdir1, MyTank, pygame sprite group of Tanks,}  & \textcolor{red}{-} & \textcolor{red}{- }\\ 
+                    & \textcolor{red}{bgMap, running\_T1} &  & \\ 
+                    
+                    \hline
+				\end{tabular}
+				
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		N/A
+		
+		\subsubsection{State Invariant}
+		N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item myTankControl would handle the key press from the two players respectively and control the tank to move, shoot, activate ultimate skills of the tanks.
+		\end{itemize}
+		
+		\subsubsection{Access Routine Semantics}
+        operatePlayer1(fire\_sound, key\_pressed, moving, movdir1, myTank, allTankGroup, brickGroup, ironGroup, running\_T1):
+		\begin{itemize}
+		\item transition: \\
+		The function shall identify the key press from the users' keyboard. If the key 'w', 's', 'a', 'd' are pressed, the tank should move up, down, left, right respectively. If the key 'j' and 'k' are pressed, the tank will shoot bullets and activate the ultimate skill.
+		
+		\item exception: None.
+        \end{itemize}
+        
+        operatePlayer2(fire\_sound, key\_pressed, moving2, movdir2, myTank, allTankGroup, brickGroup, ironGroup, running\_T2):
+		\begin{itemize}
+		\item transition: \\
+		The function shall identify the key press from the users' keyboard. If the arrow key 'up', 'down', 'left', 'right' are pressed, the tank should move up, down, left, right respectively. If the key ',' and '.' are pressed, the tank will shoot bullets and activate the ultimate skill.
+		
+		\item exception: None.
+        \end{itemize}
+
+        \textcolor{red}{operatePlayerME(key\_pressed, moving, movdir1, myTank, allTankGroup, bgMap, running\_T1):}
+		\begin{itemize}
+		\item \textcolor{red}{transition:} \\
+		\textcolor{red}{The function shall identify the key press from the users' keyboard. If the key 'w', 's', 'a', 'd' are pressed, the tank should move up, down, left, right respectively. If the key 'j' is pressed, the tank will shoot bullets.}
+		
+		\item \textcolor{red}{exception: None.}
+        \end{itemize}
+        
+\section{MIS of Wall Module}
+        \subsection{Template Module}
+        Wall
+        \subsection{inherit}
+        pygame.sprite.Sprite
+        \subsection{Uses}
+        Pygame
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					new Brick & - & - & - \\ \hline
+					new Iron & - & - & - \\ \hline
+					new Home & $\mathbb{Z}$ & - & - \\ \hline
+			    \end{tabular}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		Brick Class:\\
+		image: pygame loading image\\
+		rect: rectangle object of pygame loading image\\
+		Iron Class:\\
+		image: pygame loading image\\
+		rect: rectangle object of pygame loading image\\
+		Home Class:\\
+		image: pygame loading image\\
+		rect: rectangle object of pygame loading image\\
+        homeID: $\mathbb{Z}$\\
+		
+		\subsubsection{State Invariant}
+		None
+		
+		\subsubsection{Environmental variable}
+		brickImage: brick.png, image of brick
+        ironImage: iron.png, image of iron
+        homeImage: home.png, image of home
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item Wall module contains 3 classes, including Brick, Iron, and Home.
+		
+		\item All the 3 classes in the module consists the map of the game.
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+        Brick():
+		\begin{itemize}
+		\item transition: \\
+	    The function create a Brick object and load the brickImage into the state variable image. The state variable rect is assigned by the rectangle object of the state variable image.get\_rect().
+		
+		\item exception: None.
+        \end{itemize}
+        
+        Iron():
+		\begin{itemize}
+		\item transition: \\
+	    The function create a Iron object and load the ironImage into the state variable image. The state variable rect is assigned by the rectangle object of the state variable image.get\_rect().
+		
+		\item exception: None.
+        \end{itemize}
+        
+        Home():
+		\begin{itemize}
+		\item transition: \\
+	    The function create a Home object and load the homeImage into the state variable image. The state variable rect is assigned by the rectangle object of the state variable image.get\_rect().
+		
+		\item exception: None.
+        \end{itemize}
+        
+
+\section{\textcolor{red}{\hsout{MIS of positionType Module}}}
+        \subsection{\textcolor{red}{\hsout{Template Module}}}
+        \textcolor{red}{\sout{positionType}}
+        \subsection{\textcolor{red}{\hsout{Inherit}}}
+        \textcolor{red}{\sout{NamedTuple}}
+        \subsection{\textcolor{red}{\hsout{Uses}}}
+        \textcolor{red}{\sout{typing}}
+		\subsection{\textcolor{red}{\hsout{Syntax}}}
+		\subsubsection{\textcolor{red}{\hsout{Exported Types}}}
+			\textcolor{red}{\sout{CoordinateT = tuple of (x: int, y: int)}}
+		\subsubsection{\textcolor{red}{\hsout{Exported Access Programs}}}
+		\textcolor{red}{\sout{N/A}}
+		\subsection{\textcolor{red}{\hsout{Semantics}}}
+		
+		\subsubsection{\textcolor{red}{\hsout{State Variables}}}
+		\textcolor{red}{\sout{N/A}}
+		\subsubsection{\textcolor{red}{\hsout{State Invariant}}}
+		\textcolor{red}{\sout{N/A}}
+		
+		\subsubsection{\textcolor{red}{\hsout{Assumptions \& Design Decisions}}}
+		\textcolor{red}{\sout{N/A}}
+		\subsubsection{\textcolor{red}{\hsout{Access Routine Semantics}}}
+        \textcolor{red}{\sout{N/A}}
+        
+
+
+\section{\textcolor{red}{MIS of MapEditTank Module}}
+        \subsection{Template Module}
+        \textcolor{red}{MapEditTank}
+        \subsection{\textcolor{red}{Uses}}
+        \textcolor{red}{pygame, bullet, Map}
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+        \textcolor{red}{N/A}
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					\textcolor{red}{new MapEditTank} & \textcolor{red}{coordinate} & \textcolor{red}{-} & \textcolor{red}{-} \\ \hline
+					\textcolor{red}{shoot} & \textcolor{red}{-} & \textcolor{red}{-} & \textcolor{red}{-} \\ \hline
+					\textcolor{red}{moveUp} & \textcolor{red}{tankGroup, brickGroup, ironGroup} & \textcolor{red}{boolean} & \textcolor{red}{-} \\ \hline
+					\textcolor{red}{moveDown} & \textcolor{red}{tankGroup, brickGroup, ironGroup} & \textcolor{red}{boolean} & \textcolor{red}{-} \\ \hline
+					\textcolor{red}{moveLeft} & \textcolor{red}{tankGroup, brickGroup, ironGroup} & \textcolor{red}{boolean} & \textcolor{red}{-} \\ \hline
+					\textcolor{red}{moveRight} & \textcolor{red}{tankGroup, brickGroup, ironGroup} & \textcolor{red}{boolean} & \textcolor{red}{-} \\ \hline
+					
+			    \end{tabular}
+		\subsection{Semantics}
+		
+		\subsubsection{State Variables}
+		\textcolor{red}{N/A}
+		\subsubsection{State Invariant}
+		\textcolor{red}{N/A}
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\textcolor{red}{N/A}
+		\subsubsection{Access Routine Semantics}
+        \textcolor{red}{MapEditTank(coordinate):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The function create a MapEditTank object and set the input as the coordinate location of the tank.}\\
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    
+	    \textcolor{red}{shoot():}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The function allows MapEditTank to shoot by setting the bullet life to True. It will also controls the movement of the bullet.\\}
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    
+	    \textcolor{red}{moveUp(tankGroup, brickGroup, ironGroup):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The tank object shall move toward up by using state variable rect.move() function tomove the object. If there are other objects on the way up like brick, iron in the brickGroup, ironGroup, the tank will not be blocked by these objects since this kind of tank will only be created in map editing mode.\\}
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    \textcolor{red}{moveDown(tankGroup, brickGroup, ironGroup):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The tank object shall move down by using state variable rect.move() function to move the object. If there are other objects on the way up like brick, iron in the brickGroup, ironGroup, the tank will not be blocked by these objects since this kind of tank will only be created in map editing mode.\\}
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    \textcolor{red}{moveLeft(tankGroup, brickGroup, ironGroup):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:\\}
+	    \textcolor{red}{The tank object shall move left by using state variable rect.move() function to move the object. If there are other objects on the way up like brick, iron in the brickGroup, ironGroup, the tank will not be blocked by these objects since this kind of tank will only be created in map editing mode.\\}
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    \textcolor{red}{moveRight(tankGroup, brickGroup, ironGroup):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:\\}
+	    \textcolor{red}{The tank object shall move right by using state variable rect.move() function to move the object. If there are other objects on the way up like brick, iron in the brickGroup, ironGroup, the tank will not be blocked by these objects since this kind of tank will only be created in map editing mode.\\}
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+        
+\section{MIS of Display Module}
+        \subsection{Template Module}
+        display
+        \subsection{Uses}
+        pygame, wall
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+					
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+			
+    		drawPVE & homeSurvive & homeSurvive & -\\
+    		& mytankGroup, & mytankGroup, & \\ 
+    		& deadCount1 & deadCount1 & \\ 
+    		& deadCount2 & deadCount2 & \\ 
+    		& switch\_R1\_R2\_image & switch\_R1\_R2\_image & \\ 
+    		& enemyCouldMove & running\_T1 & \\ 
+    		& enemyNumber & running\_T2 & \\ 
+    		& prop & allTankGroup & \\ 
+    		& moving & enemyNumber & \\ 
+    		& running\_T1 & myTank\_T1.bullet.life & \\ 
+    		& running\_T2 & myTank\_T1.bullet.rect.left & \\ 
+    		& bgMap & myTank\_T1.bullet.rect.right & \\ 
+    		& background\_image & myTank\_T2.bullet.life & \\ 
+    		& screen & myTank\_T2.bullet.rect.left & \\ 
+    		& delay & myTank\_T2.bullet.rect.right & \\
+    		& myTank\_T1 & moving & \\
+    		& myTank\_T2 & myTank\_T1.rect.left & \\ 
+    		& allEnemyGroup & myTank\_T1.rect.top & \\
+    		& allTankGroup & myTank\_T1.level & \\ 
+    		& appearance & myTank\_T2.rect.left & \\
+    		& enemyBulletGroup & myTank\_T2.rect.top & \\
+    		& redEnemyGroup & prop.life & \\
+    		& greenEnemyGroup & enemyCouldMove& \\
+    		& otherEnemyGroup & & \\\hline
+    		drawPVP &  &  & -\\ 
+    		 & homeDead & homeDead &  \\
+    		 & mytankGroup & mytankGroup &  \\
+    		 & deadCount1 & deadCount1 &  \\
+    		 & deadCount2 & deadCount2 &  \\
+    		 & switch\_R1\_R2\_image & switch\_R1\_R2\_image &  \\
+    		 & moving & running\_T1 &  \\
+    		 & running\_T1 & running\_T2 &  \\
+    		 & running\_T2 & allTankGroup &  \\
+    		 & bgMap & myTank\_T1.bullet.life &  \\
+    		 & background\_image & myTank\_T1.bullet.rect.left &  \\
+    		 & screen & myTank\_T1.bullet.rect.right &  \\
+    		 & delay & myTank\_T2.bullet.life &  \\
+    		 & myTank\_T1 & myTank\_T2.bullet.rect.left &  \\
+    		 & myTank\_T2 & myTank\_T2.bullet.rect.right &  \\
+    		 & allTankGroup & moving &  \\
+    		 &  & myTank\_T1.rect.left &  \\
+    		 &  & myTank\_T1.rect.top &  \\
+    		 &  & myTank\_T1.level &  \\
+    		 &  & myTank\_T2.rect.left &  \\
+    		 &  & myTank\_T2.rect.top &  \\
+    		 \hline
+			
+    	\end{tabular}
+        
+        
+        \begin{tabular}[pos]{|c|c|c|c|}
+					
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+    		 \textcolor{red}{drawME} &  &  & \textcolor{red}{-}\\ 
+    		 & \textcolor{red}{bgMap} & \textcolor{red}{bgMap} &  \\
+    		 & \textcolor{red}{deadCount1} & \textcolor{red}{allTankGroup} &  \\
+    		 & \textcolor{red}{mytankGroup} & \textcolor{red}{mytankGroup} &  \\
+    		 & \textcolor{red}{switch\_R1\_R2\_image} & \textcolor{red}{switch\_R1\_R2\_image} &  \\
+    		 & \textcolor{red}{moving} & \textcolor{red}{moving} &  \\
+    		 & \textcolor{red}{running\_T1} & \textcolor{red}{running\_T1} &  \\
+    		 & \textcolor{red}{background\_image} & \textcolor{red}{myTank\_T1.bullet.life} &  \\
+    		 & \textcolor{red}{screen} & \textcolor{red}{myTank\_T1.bullet.rect.left} &  \\
+    		 & \textcolor{red}{delay} & \textcolor{red}{myTank\_T1.bullet.rect.right} &  \\
+    		 & \textcolor{red}{myTank\_T1} & \textcolor{red}{myTank\_T1.rect.left} &  \\
+    		 & \textcolor{red}{allTankGroup} & \textcolor{red}{myTank\_T1.rect.top} &  \\
+    		 \hline
+			
+    	\end{tabular}
+        
+        
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		N/A
+		
+		\subsubsection{State Invariant}
+		N/A
+		\subsection{Environment Variables}
+		bang.sound : A audio file with type .wav.
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item Display.py is designed to be used to draw every elements on the gaming screen.
+		
+		\item It can also determine the changes in the game and show the results of changes on the screen.
+		
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+		
+	    drawPVE(homeSurvive, mytankGroup, deadCount1, deadCount2, switch\_R1\_R2\_image, \\enemyCouldMove, enemyNumber, prop, moving, running\_T1, running\_T2, bgMap, \\background\_image, screen,delay, myTank\_T1, myTank\_T2, allEnemyGroup, allTankGroup, \\appearance, enemyBulletGroup, redEnemyGroup, greenEnemyGroup, otherEnemyGroup):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawPVE function is used in PVE module. After calling this function, all the functions related to PVE mode will be used and build a complete PVE environment together. The function returns homeSurvive, mytankGroup, deadCount1, deadCount2, switch\_R1\_R2\_image, running\_T1, running\_T2, allTankGroup, enemyNumber, \\myTank\_T1.bullet.life, myTank\_T1.bullet.rect.left, \\myTank\_T1.bullet.rect.right, myTank\_T2.bullet.life, \\myTank\_T2.bullet.rect.left, myTank\_T2.bullet.rect.right, moving, myTank\_T1.rect.left,\\ myTank\_T1.rect.top, myTank\_T1.level, myTank\_T2.rect.left, myTank\_T2.rect.top, \\prop.life, enemyCouldMove.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawPVP(homeDead, mytankGroup, deadCount1, deadCount2, switch\_R1\_R2\_image, moving, running\_T1, running\_T2, bgMap, background\_image, screen,delay, myTank\_T1, myTank\_T2, allTankGroup):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawPVP function is used in PVP module. After calling this function, all the functions related to PVP mode will be used and build a complete PVP environment together. The function returns homeDead, mytankGroup, deadCount1, deadCount2, switch\_R1\_R2\_image, running\_T1, running\_T2, allTankGroup, myTank\_T1.bullet.life, \\myTank\_T1.bullet.rect.left, myTank\_T1.bullet.rect.right, myTank\_T2.bullet.life, \\ myTank\_T2.bullet.rect.left, myTank\_T2.bullet.rect.right, moving, \\myTank\_T1.rect.left, myTank\_T1.rect.top, myTank\_T1.level, myTank\_T2.rect.left, myTank\_T2.rect.top.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    \textcolor{red}{drawME(bgMap, deadCount1, mytankGroup, switch\_R1\_R2\_image, moving, running\_T1, background\_image, screen, delay, myTank\_T1, allTankGroup):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The drawME function is used in map editing module. After calling this function, all the functions related to map editing mode will be used and build a complete map editing environment together. The function returns bgMap, allTankGroup, mytankGroup, switch\_R1\_R2\_image, moving, running\_T1, myTank\_T1.bullet.life, \\myTank\_T1.bullet.rect.left, myTank\_T1.bullet.rect.right, myTank\_T1.rect.left, myTank\_T1.rect.top.}\\
+	    
+	    \item \textcolor{red}{exception:}\\ \textcolor{red}{None.}
+	    \end{itemize}
+	    
+	    \subsubsection{Local Functions}
+	    
+	    \textcolor{red}{checkCollideME(bullet, bgMap):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The bullet represents the bullet object shot by the tank. The bgMap represents the map object. checkCollideME function is used to determine the results for every colliding cases in the map editing mode, including collides between bullets and brick walls, bullets and iron walls. The function will return bullet and bgMap so that the game system will get the changes of these two variables.}\\
+	    
+	    \item \textcolor{red}{exception:\\ None}
+	    \end{itemize}
+	    
+	    
+	    checkCollidePVP(bullet, bgMap, myTank, homeDead):
+	    \begin{itemize}
+	    \item transition:\\
+	    The bullet represents the bullet object shot by the tank. The bgMap represents the map object. The myTank object represents the tank which will be shot in the PVP mode. The homeDead is a variable which is used to record whether the home base is destroyed. checkCollidePVP function is used to determine the results for every colliding cases in the game, including collides between bullets and different kinds of tanks, bullets and brick walls, bullets and iron walls. The function will return bullet, bgMap, myTank, homeDead so that the game system will get the changes of these four variables.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    checkCollidePVE(enemyBulletGroup, bullet, redEnemyGroup, greenEnemyGroup, \\otherEnemyGroup, bgMap, prop, enemyNumber, homeSurvive):
+	    \begin{itemize}
+	    \item transition:\\
+	    The enemyBulletGroup reprensents the group of enemy tanks generated in this game. The bullet represents the bullet object shot by the tank. The bgMap represents the map object. The redEnemyGroup, greenEnemyGroup, and otherEnemyGroup represents different kinds of enemy tanks. The prop is used to generate food in the PVE game. The enemyNumber is used to control the total enemy number on the PVP battlefield. The homeSurvive is a variable to determine whether the home base still exists. CheckCollidePVE function is used to determine the results for every colliding cases in the game, including collides between bullets and different kinds of enemies, bullets and brick walls, bullets and iron walls. The function will return enemyBulletGroup, bullet, redEnemyGroup, greenEnemyGroup, otherEnemyGroup, bgMap, prop, enemyNumber, homeSurvive so that the game system will get the changes of these four variables.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawBG(background\_image, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    Generates the background image.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawBrick(bgMap, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    Display every unit of brick walls from the Brick group of the bgMap.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawIron(bgMap, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    Display every unit of iron walls from the iron group of the bgMap.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawHome(bgMap, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    Display all the home base from the home group of the bgMap.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawTank\_1(deadCount1, switch\_R1\_R2\_image, running\_T1, delay, myTank\_T1, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawTank\_1 function will display the player 1's corresponding tank image on the screen. It will also change the image in order to make the tank look like it is moving based on the value of switch\_R1\_R2\_image. The function returns switch\_R1\_R2\_image, running\_T1 to update the latest variables.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawTank\_2(deadCount2, switch\_R1\_R2\_image, running\_T2, myTank\_T2, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawTank\_1 function will display the player 2's corresponding tank image on the screen. It will also change the image in order to make the wheels look like it is moving based on the value of switch\_R1\_R2\_image. The function returns running\_T2 to update the latest variables.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawEnemyTank(switch\_R1\_R2\_image, enemyCouldMove, bgMap, allEnemyGroup, screen, allTankGroup, appearance):
+	    
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawEnemyTank function will display the images of enemy tanks on the screen. Dirrerent kinds of enemy tanks will generate different images. It will also change the image in order to make the wheels look like moving based on the value of switch\_R1\_R2\_image. The system returns switch\_R1\_R2\_image and allTankGroup.\\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawMyBullet(deadCount, homeSurvive, enemyNumber, prop, bgMap, myTank, screen, enemyBulletGroup, redEnemyGroup, greenEnemyGroup, otherEnemyGroup): 
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawMyBullet function will display the bullets if the player shoots by pressing the corresponding key and make them disappear based on the collide check. The function returns deadCount, homeSurvive, enemyNumber, myTank.bullet.life, myTank.bullet.rect.left, myTank.bullet.rect.right. \\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawEnemyBullet(homeSurvive, mytankGroup, deadCount1, deadCount2, enemyCouldMove, moving, bgMap, allEnemyGroup, enemyBulletGroup, screen, myTank\_T1, myTank\_T2 ):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawEnemyBullet function will display the bullets if the enemy shoots and make them disappear in different situations using enemy tanks' bullet collide check. The function returns homeSurvive, mytankGroup, deadCount1, deadCount2, moving,\\ myTank\_T1.rect.left, myTank\_T1.rect.top, myTank\_T1.level, \\myTank\_T2.rect.left, myTank\_T2.rect.top. \\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawFood(enemyNumber, enemyCouldMove, prop, bgMap, screen, allEnemyGroup, myTank):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawFood function will display the food if a food is generated. Also the function will determine what kinds of effects will be generated if the tank eats a food. The function returns prop.life, enemyCouldMove, enemyNumber. \\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	    
+	    drawMyBulletPVP(deadCount1, deadCount2, myTank\_T2, homeDead, bgMap, myTank\_T1, screen):
+	    \begin{itemize}
+	    \item transition:\\
+	    The drawMyBulletPVP function will display the bullets in PVP mode if the player shoots by pressing the corresponding key and make them disappear based on the collide check. The function returns deadCount2, myTank\_T2.rect.left, myTank\_T2.rect.top, myTank\_T2.level, \\homeDead, myTank\_T1.bullet.life, myTank\_T1.bullet.rect.left, myTank\_T1.bullet.rect.right. \\
+	    
+	    \item exception:\\ None.
+	    \end{itemize}
+	   
+	    \textcolor{red}{drawBulletME(bgMap, myTank\_T1, screen):}
+	    \begin{itemize}
+	    \item \textcolor{red}{transition:}\\
+	    \textcolor{red}{The drawMyBulletME function will display the bullets in map editing mode if the player shoots by pressing the corresponding key and make them disappear based on the collide check. The function returns bgMap, myTank\_T1, and screen. }\\
+	    
+	    \item \textcolor{red}{exception:\\ None.}
+	    \end{itemize}
+	    
+	    
+\section{MIS of Screen Module}
+        \subsection{Template Module}
+        screen
+        \subsection{Uses}
+        pygame, MyTank, positionType, os, highSpeedTank, doubleLifeTank, fastBulletTank.
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+		\begin{tabular}[pos]{|c|c|c|c|}
+			
+			\hline
+			%	\label
+			\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+			\textcolor{red}{StartGame} & \textcolor{red}{-} & \textcolor{red}{-} & \textcolor{red}{-}\\ \hline
+			\textcolor{red}{Menue} & \textcolor{red}{-} & \textcolor{red}{-} & \textcolor{red}{-}\\ \hline
+			chooseTankScreen & CoordinateT, CoordinateT & MyTank, MyTank & -\\ \hline
+    		loadingMapScreen & File & Map & -\\ \hline
+    		\textcolor{red}{operationInstructPlay} & \textcolor{red}{-} & \textcolor{red}{-} & \textcolor{red}{-}\\ \hline
+    		\textcolor{red}{operationInstructMap} & \textcolor{red}{-} & \textcolor{red}{-} & \textcolor{red}{-}\\ \hline
+    		ruleScreen & Rule & - & -\\ \hline
+    		endScreen\_PVE & $\mathbb{Z}$ & - & -\\ \hline
+    		endScreen\_PVP & $\mathbb{Z}$ & - & -\\ \hline
+    		\textcolor{red}{saveScreenME} & \textcolor{red}{File} & \textcolor{red}{Map} & \textcolor{red}{-}\\ \hline
+    		\textcolor{red}{chooseMapME} & \textcolor{red}{-} & \textcolor{red}{selection} & \textcolor{red}{-}\\ \hline
+			
+		\end{tabular}
+
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		clock : pygame clock\\
+		resolution = $\mathbb{Z}$, $\mathbb{Z}$\\
+		screen : pygame display set mode\\
+		chooseTank :pygame loading image\\
+		c1 : CoordinateT\\
+		c2 : CoordinateT\\
+		myTank\_T1 : MyTank\\
+		myTank\_T2 : MyTank\\
+		keypress : pygame key get pressed\\
+		image : pygame loading image\\
+		my\_font : pygame font\\
+		coor : $\mathbb{Z}$\\
+		countt : $\mathbb{Z}$\\
+		confirm : $\mathbb{B}$\\
+		PVERule : pygame loading image\\
+		PVPRule : pygame loading image\\
+		rule : $\mathbb{Z}$\\
+		PVEWin : pygame loading image\\
+		PVELose : pygame loading image\\
+		PVPWin1 : pygame loading image\\
+		PVPWin2 : pygame loading image\\
+		PVPDraw : pygame loading image\\
+		
+		
+		\subsubsection{State Invariant}
+		N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		N/A
+		\subsubsection{Access Routine Semantics}
+		\textcolor{red}{StartGame()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the starting screen image and show on the screen.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{None}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+		
+		\textcolor{red}{Menue()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the menu screen image and show on the screen.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{None}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+		
+		chooseTankScreen(coordinate\_T1, coordinate\_T2):
+		\begin{itemize}
+		\item transition:\\ clock and screen are created as pygame clock, and set display mode, respectively. resolution, c1, c2 are initialized to be (630, 630), coordinate\_T1, coordinate\_T2, respectively and myTank\_T1, myTank\_T2 are initialized to doubleLifeTank(c1), highSpeedTank(c2), respectively. keypress is set to pygame.key.get\_pressed(), and the value of confirm is set to False. When the players start to choose the tanks, different tank type will be assigned to myTank\_T1, and myTank\_T2. The keys 1, 2, 3 stand for doubleLifeTank, highSpeedTank, fastBulletTank for myTank\_T1, respectively.The keys 7, 8, 9 are doubleLifeTank, highSpeedTank, fastBulletTankare for myTank\_T2.
+		\item output:\\myTank\_T1, myTank\_T2 are returned.
+		\item exception:\\None.
+		\end{itemize}
+		loadingMapScreen(File):
+		\begin{itemize}
+    		\item transition:\\clock and screen are created as pygame clock, and set display mode, respectively. resolution are initialized to (630, 630). My\_font is changed to pygame.font.Font(None,40), coor and countt are changed to 241 and 1. respectively. For i in the File, string = str(countt) + ". " + str(i) , coor and countt are changed to coor + 30 and countt + 1, respectively. The value of confirm is changed to False. returnMap = File[0], keypress = pygame.key.get\_pressed(). Different values are assigned to returnMap depending on the key pressed by the players.
+		\item output:\\returnMap is returned.
+		\item exception:\\None.
+		\end{itemize}
+		
+		\textcolor{red}{operationInstructPlay()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the operation instruction screen image and show on the screen.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{None}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+		
+		\textcolor{red}{operationInstructMap()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the operation instruction screen image for map editing and show on the screen.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{None}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+		
+		ruleScreen(Rule):
+		\begin{itemize}
+		\item transition:\\clock and screen are created as pygame clock, and set display mode, respectively. resolution are initialized to (630, 630). The image are loaded to PVERule and PVPRule, and if rule equals to 0, PVERule will be assigned to image, otherwise PVPRule will be assigned to image. The value of confirm is changed to False, keypress = pygame.key.get\_pressed(). If the players press the key Return, confirm will be set to True.
+		\item exception:\\ None
+		\end{itemize}
+		
+		endScreen\_PVE():
+		\begin{itemize}
+		\item transition: \\clock and screen are created as pygame clock, and set display mode, respectively. resolution are initialized to (630, 630). The images are loaded to PVEWin and PVPLose. If result is True, PVEWin will be assigned to image, otherwise PVELose will be assigned. The value of confirm is changed to False, keypress = pygame.key.get\_pressed(). If the players press the key Return, confirm will be set to True.
+		\item exception: \\None.
+		\end{itemize}
+		
+		endScreen\_PVP():
+		\begin{itemize}
+		\item transition:\\clock and screen are created as pygame clock, and set display mode, respectively. resolution are initialized to (630, 630). The images are loaded to PVPWin1, PVPWin2, and PVPDraw. If result equals to 1, PVPWin1 will be assigned to image, and if result equals to 2, PVPWin2 will be assigned to image, otherwise PVPDraw will be assigned to image. The value of confirm is changed to False, keypress = pygame.key.get\_pressed().If the players press the key Return, confirm will be set to True.
+		\item exception:\\ None.
+		\end{itemize}
+		
+		\textcolor{red}{saveScreenME()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the save map screen image for map editing and show on the screen.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{Map is returned.}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+        
+        \textcolor{red}{chooseMapME()}:
+		\begin{itemize}
+		\item \textcolor{red}{transition}:\\ \textcolor{red}{Get the choose map screen image for map editing and show at the beginning of map editing mode.}
+		\item \textcolor{red}{output}:\\\textcolor{red}{selection between PVP map and PVE map is returned.}
+		\item \textcolor{red}{exception}:\\\textcolor{red}{None.}
+		\end{itemize}
+        
+\section{MIS of P vs E Module}
+        \subsection{Template Module}
+        PvsE
+        \subsection{Uses}
+        pygame\\
+        Bullet \\
+        BulletControl \\
+        MyTankControl \\
+        DoubleLifeTank \\
+        EnemyTank \\
+        FastBulletTank \\
+        Food \\
+        HighSpeedTank \\
+        Map\\
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					PvsE & - & - & - \\ \hline
+			    \end{tabular}
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		game\_result : $\mathbb{Z}$\\
+		coordinate\_T1 : CoordinateT\\
+		coordinate\_T2 : CoordinateT\\
+		myTank\_T1 : MyTank\\
+		myTank\_T2 : MyTank\\
+		returnMap : Map\\
+		resolution ; $\mathbb{Z}$, $\mathbb{Z}$\\
+		screen : pygame display mode\\
+		background\_image : pygame loading image\\
+        home\_image : pygame loading image\\
+        home\_destroyed\_image : pygame loading image\\
+        bang\_sound : pygame loading sound\\
+        fire\_sound : pygame loading sound\\
+        start\_sound : pygame loading sound\\
+        allTankGroup : pygame sprite group\\
+        myTankGroup : pygame sprite group\\
+        bgMap : PVEMap\\
+        prop : Food\\
+        deadCount1 : $\mathbb{Z}$\\
+        deadCount2 : $\mathbb{Z}$\\
+        strtime1 : String\\
+        strtime2 : String\\
+        deadline : datetime\\
+        now : datetime\\
+        subtime : $\mathbb{Z}$\\
+        ttime = decTime\\
+        MYBULLETNOTCOOLINGEVENT : pygame event\\
+        BULLETP : pygame event\\
+        LEAP : pygame event\\
+        Time : pygame event\\
+        delay : $\mathbb{Z}$\\
+		moving : $\mathbb{Z}$\\
+		movdir : $\mathbb{Z}$\\
+		moving2 : $\mathbb{Z}$\\
+		movdir2 : $\mathbb{Z}$\\
+		enemyNumber : $\mathbb{Z}$\\
+		enemyCouldMove : $\mathbb{B}$\\
+		switch\_R1\_R2\_image : $\mathbb{B}$\\
+		homeDead : $\mathbb{Z}$\\
+		running\_T1 : $\mathbb{B}$\\
+		running\_T2 : $\mathbb{B}$\\
+		clock : pygame clock
+		
+		\subsubsection{State Invariant}
+		N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item This is to run the PVE mode for the game, the mode will call the other classes to create the map, the players' tanks, the enemy tanks, and the players' home. Players can win the game by staying alive(each player can reborn 2 times) for a certain time, and the players will lose if both of them die in that time or their home is destroyed.
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+        PvsP():
+		\begin{itemize}
+		\item transition : The game\_result, coordinate\_T1, coordinate\_T2, deadCount1 and deadCount2 are initialized to 1, (8,24), (16,24), 0 and 0, respectively, and the players' tanks are created when the by calling the choosenTankScreen() after the palyers selecting the tank. The Map file is read by calling the loadingMapScreen() and the map is created by call the Map module. The images and sound files are loaded into backgroup\_image, home\_image, home\_destroyde\_image, fire\_sound, start\_sound, respectively. The map is loaded by calling loadPVEMap(), and the food is created by calling Food(). allTankGroup and myTankGroup will initialized as the pygame sprite group and two players' tanks are added to the myTankGroup. Four events called MYBULLETCOOLINGEVENT, BULLETTP, LEAP, TIME are created and the timer are set to be 200ms, 1000ms, 1000ms and 1000ms, respectively. Delay, moving, movdir, moving2, movdir2, enemyNumber, enemyCouldMove, switch\_R1\_R2\_image, homeDead, running\_T1, running\_T2 are initialized to 100, 0, 0, 0, 0, 3, True, True, 0, True, True, respectively, and the clock is created as a pygame clock.
+		
+		\item exception:\\None.
+		\end{itemize}
+
+\section{MIS of P vs P Module}
+        \subsection{Template Module}
+        PvsP
+        \subsection{Uses}
+        Pygame\\
+        Bullet \\
+        BulletControl \\
+        MyTankControl \\
+        DoubleLifeTank \\
+        FastBulletTank \\
+        Food \\
+        HighSpeedTank \\
+        Map\\
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					PvsP & - & - & - \\ \hline
+			    \end{tabular}
+
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		game\_result : $\mathbb{Z}$\\
+		coordinate\_T1 : CoordinateT\\
+		coordinate\_T2 : CoordinateT\\
+		myTank\_T1 : MyTank\\
+		myTank\_T2 : MyTank\\
+		returnMap : Map\\
+		resolution ; $\mathbb{Z}$, $\mathbb{Z}$\\
+		screen : pygame display mode\\
+		background\_image : pygame loading image\\
+        home\_image : pygame loading image\\
+        home\_destroyed\_image : pygame loading image\\
+        bang\_sound : pygame loading sound\\
+        fire\_sound : pygame loading sound\\
+        start\_sound : pygame loading sound\\
+        allTankGroup : pygame sprite group\\
+        myTankGroup : pygame sprite group\\
+        bgMap : PVPMap\\
+        prop : Food\\
+        deadCount1 : $\mathbb{Z}$\\
+        deadCount2 : $\mathbb{Z}$\\
+        strtime1 : String\\
+        strtime2 : String\\
+        deadline : datetime\\
+        now : datetime\\
+        subtime : $\mathbb{Z}$\\
+        ttime = decTime\\
+        MYBULLETNOTCOOLINGEVENT : pygame event\\
+        BULLETP : pygame event\\
+        LEAP : pygame event\\
+        Time : pygame event\\
+        delay : $\mathbb{Z}$\\
+		moving : $\mathbb{Z}$\\
+		movdir : $\mathbb{Z}$\\
+		moving2 : $\mathbb{Z}$\\
+		movdir2 : $\mathbb{Z}$\\
+		enemyNumber : $\mathbb{Z}$\\
+		enemyCouldMove : $\mathbb{B}$\\
+		switch\_R1\_R2\_image : $\mathbb{B}$\\
+		homeDead : $\mathbb{Z}$\\
+		running\_T1 : $\mathbb{B}$\\
+		running\_T2 : $\mathbb{B}$\\
+		clock : pygame clock
+		\subsubsection{State Invariant}
+		N/A
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item This is to run the PVP mode for the game, the mode will call the other classes to create the map, the players' tanks, the enemy tanks, and the players' homes. Players can win the game by the destroy the other one's tank by 3 times or destroy his home, which is represented by an eagle. If a certain time is over and both players are alive, it will be a tie. 
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+		PvsP():
+		\begin{itemize}
+		\item transition : The game\_result, coordinate\_T1, coordinate\_T2, deadCount1 and deadCount2 are initialized to 1, (8,24), (16,24), 0 and 0, respectively, and the players' tanks are created when the by calling the choosenTankScreen() after the palyers selecting the tank. The Map file is read by calling the loadingMapScreen() and the map is created by call the Map module. The images and sound files are loaded into backgroup\_image, home\_image, home\_destroyde\_image, fire\_sound, start\_sound, respectively. The map is loaded by calling loadPVPMap(), and the food is created by calling Food(). allTankGroup and myTankGroup will initialized as the pygame sprite group and two players' tanks are added to the myTankGroup. Four events called MYBULLETCOOLINGEVENT, BULLETTP, LEAP, TIME are created and the timer are set to be 200ms, 1000ms, 1000ms and 1000ms, respectively. Delay, moving, movdir, moving2, movdir2, enemyNumber, enemyCouldMove, switch\_R1\_R2\_image, homeDead, running\_T1, running\_T2 are initialized to 100, 0, 0, 0, 0, 3, True, True, 0, True, True, respectively, and the clock is created as a pygame clock.
+		
+		\item exception:\\None.
+		\end{itemize}
+		
+
+\section{MIS Map Editing Module}
+        \subsection{Template Module}
+        MapEditing
+        \subsection{Uses}
+        pygame\\
+        MyTank\\
+        MyTankControl\\
+        Screen\\
+        display\\
+        positionType\\
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		N/A
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					mapEditing & - & - & -\\ \hline
+					\textcolor{red}{\sout{chooseTankScreenMap}} & \textcolor{red}{\sout{-}} & \textcolor{red}{\sout{-}} & \textcolor{red}{\sout{-}}\\ \hline
+					\textcolor{red}{\sout{buildWall}} & \textcolor{red}{\sout{-}} & \textcolor{red}{\sout{-}} & \textcolor{red}{\sout{-}}\\ \hline
+					
+				\end{tabular}
+
+		
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		None
+		
+		\subsubsection{State Invariant}
+		None
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The mapEditing module will be used to create a PVP or PVE map and save it as a text file in the corresponding folder.
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+		mapEditing(): \\
+		\begin{itemize}
+		\item transition : The mapEditing function will generate a map editing mode for users to create their own map. In this module, a tank will be created and tank control will be used. The user can add brick using key "J" and add iron wall by pressing key "K", and remove walls by pressing "L". The coordinates will be represented by the tank on the screen. If the mode ends, the created map will be saved as a text file in the PVPmap or PVEmap folder.
+		
+		\item exception:\\None.
+		\end{itemize}
+		
+		\textcolor{red}{\sout{chooseTankScreenMap(coordinate\_T1):}}\\
+		\begin{itemize}
+		\item transition: \textcolor{red}{\sout{The chooseTankScreenMap function will generate a tank based on the given coordinates.}}
+		
+		\item exception:\\\textcolor{red}{\sout{None}}.
+		\end{itemize}
+		
+		\textcolor{red}{\sout{buildWall()}}:\\
+		\begin{itemize}
+		\item transition: \textcolor{red}{\sout{The buildWall function will get the user's key\_pressed input and generate the corresponding actions which includes adding brick walls, adding iron walls, and delete walls.}}
+		
+		\item exception:\\\textcolor{red}{\sout{None}}.
+		\end{itemize}
+
+		
+		
+\section{MIS of Main Module}
+        \subsection{Template Module}
+        \textcolor{red}{main}
+        \subsection{Uses}
+        \textcolor{red}{N/A}
+		\subsection{Syntax}
+		\subsubsection{Exported Types}
+		\textcolor{red}{N/A}
+		\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					main & - & - & -\\ \hline
+			    \end{tabular}
+
+		\subsection{Semantics}
+		\subsubsection{State Variables}
+		None
+		
+		\subsubsection{State Invariant}
+		None
+		
+		\subsubsection{Assumptions \& Design Decisions}
+		\begin{itemize}
+		\item The main module will be the file which starts the whole game. Also main module will be the overall controller of the game. Users can get an access to PVE, PVP, or map editing mode through the main module.
+		\end{itemize}
+		\subsubsection{Access Routine Semantics}
+		main(): \\
+		\begin{itemize}
+		\item transition : The main function will be used as the menu of the whole game, which includes three accesses: PVE mode, PVP mode, and map editing mode. 
+		
+		\item exception:\\None.
+		\end{itemize}
+		   
+\end{document}

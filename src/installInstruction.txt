@@ -1,0 +1,17 @@
+Install prerequisite:
+1. Python 3 is installed. Python 3 could be downloaded from https://www.python.org/downloads/
+2. Pygame is installed. Pygame could be downloaded from https://pypi.org/project/pygame/#files
+
+
+Install Instruction:
+
+1. Go to https://gitlab.cas.mcmaster.ca/huangx65/tankwar/-/tree/master/
+2. Download the whole "src" folder under the root folder of TankWar project.
+3. The installation is finished.
+
+Open the game
+4. Go to the "src" folder, there is a subfolder named "src" too. Go the subfolder "src".
+5. Open your terminal or command window under the path mentioned in the previous instruction, and type the following command. The game will start.
+
+python3 main.py
+

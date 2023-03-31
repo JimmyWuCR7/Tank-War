@@ -1,0 +1,172 @@
+\hypertarget{my_tank_control_8py}{}\section{src/my\+Tank\+Control.py File Reference}
+\label{my_tank_control_8py}\index{src/myTankControl.py@{src/myTankControl.py}}
+
+
+My Tank Control Module.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{my_tank_control_8py_a5ea3be3158afbe7a64c0c796477c4831}{my\+Tank\+Control.\+operate\+Player1}} (fire\+\_\+sound, key\+\_\+pressed, moving, movdir1, my\+Tank, all\+Tank\+Group, brick\+Group, iron\+Group, running\+\_\+\+T1)
+\begin{DoxyCompactList}\small\item\em Implement player1\textquotesingle{}s operation. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{my_tank_control_8py_a23dc81fe67653578d3db687b7b731712}{my\+Tank\+Control.\+operate\+Player2}} (fire\+\_\+sound, key\+\_\+pressed, moving2, movdir2, my\+Tank, all\+Tank\+Group, brick\+Group, iron\+Group, running\+\_\+\+T2)
+\begin{DoxyCompactList}\small\item\em Implement player2\textquotesingle{}s operation. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{my_tank_control_8py_a7fc73855aff3b9b1be2770c5dd103921}{my\+Tank\+Control.\+operate\+Player\+ME}} (key\+\_\+pressed, moving, movdir1, my\+Tank, all\+Tank\+Group, bg\+Map, running\+\_\+\+T1)
+\begin{DoxyCompactList}\small\item\em Implement player operation in Map Editing mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+My Tank Control Module. 
+
+\begin{DoxyAuthor}{Author}
+Xinyu Huang, Di Wu, Jiahao Zhou 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+03/24/2020 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{my_tank_control_8py_a5ea3be3158afbe7a64c0c796477c4831}\label{my_tank_control_8py_a5ea3be3158afbe7a64c0c796477c4831}} 
+\index{myTankControl.py@{myTankControl.py}!operatePlayer1@{operatePlayer1}}
+\index{operatePlayer1@{operatePlayer1}!myTankControl.py@{myTankControl.py}}
+\subsubsection{\texorpdfstring{operatePlayer1()}{operatePlayer1()}}
+{\footnotesize\ttfamily def my\+Tank\+Control.\+operate\+Player1 (\begin{DoxyParamCaption}\item[{}]{fire\+\_\+sound,  }\item[{}]{key\+\_\+pressed,  }\item[{}]{moving,  }\item[{}]{movdir1,  }\item[{}]{my\+Tank,  }\item[{}]{all\+Tank\+Group,  }\item[{}]{brick\+Group,  }\item[{}]{iron\+Group,  }\item[{}]{running\+\_\+\+T1 }\end{DoxyParamCaption})}
+
+
+
+Implement player1\textquotesingle{}s operation. 
+
+Read player1\textquotesingle{}s key pressed and do the corresponding moving, @or activation of the ultimate skill. 
+\begin{DoxyParams}{Parameters}
+{\em fire\+\_\+sound} & represents a audio file for the sound of shooting. \\
+\hline
+{\em key\+\_\+pressed} & represents that if the player is pressing a key. \\
+\hline
+{\em moving} & represents the moving condition of the tank. \\
+\hline
+{\em movdir1} & represents the direction of player\textquotesingle{}s tank. \\
+\hline
+{\em my\+Tank} & represents the player\textquotesingle{}s tank. \\
+\hline
+{\em all\+Tank\+Group} & represents a sprite group in pygame for all the tank. \\
+\hline
+{\em brick\+Group} & represents a sprite group in pygame for brick walls. \\
+\hline
+{\em iron\+Group} & represents a sprite group in pygame for iron walls. \\
+\hline
+{\em running\+\_\+\+T1} & represents that player\textquotesingle{}s tank is moving or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+key\+\_\+pressd represents that if the player is pressing a key. 
+
+moving represents the moving condition of the tank. 
+
+movdir1 represent the direction of of the tank. 
+
+my\+Tank represents the player\textquotesingle{}s tank. 
+
+all\+Tank\+Group represents a sprite group in pygame for all the tank. 
+
+brick\+Group represents a sprite group in pygame for brick walls. 
+
+iron\+Group represents a sprite group in pygame for iron walls. 
+
+running\+\_\+\+T1 represents that player\textquotesingle{}s tank is moving or not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{my_tank_control_8py_a23dc81fe67653578d3db687b7b731712}\label{my_tank_control_8py_a23dc81fe67653578d3db687b7b731712}} 
+\index{myTankControl.py@{myTankControl.py}!operatePlayer2@{operatePlayer2}}
+\index{operatePlayer2@{operatePlayer2}!myTankControl.py@{myTankControl.py}}
+\subsubsection{\texorpdfstring{operatePlayer2()}{operatePlayer2()}}
+{\footnotesize\ttfamily def my\+Tank\+Control.\+operate\+Player2 (\begin{DoxyParamCaption}\item[{}]{fire\+\_\+sound,  }\item[{}]{key\+\_\+pressed,  }\item[{}]{moving2,  }\item[{}]{movdir2,  }\item[{}]{my\+Tank,  }\item[{}]{all\+Tank\+Group,  }\item[{}]{brick\+Group,  }\item[{}]{iron\+Group,  }\item[{}]{running\+\_\+\+T2 }\end{DoxyParamCaption})}
+
+
+
+Implement player2\textquotesingle{}s operation. 
+
+Read player2\textquotesingle{}s key pressed and do the corresponding moving, @shooting or activatation of the ultimate skill. 
+\begin{DoxyParams}{Parameters}
+{\em fire\+\_\+sound} & represents a audio file for the sound of shooting. \\
+\hline
+{\em key\+\_\+pressed} & represents that if the player is pressing a key. \\
+\hline
+{\em moving2} & represents the moving condition of the tank. \\
+\hline
+{\em movdir2} & represents the direction of player\textquotesingle{}s tank. \\
+\hline
+{\em my\+Tank} & represents the player\textquotesingle{}s tank. \\
+\hline
+{\em all\+Tank\+Group} & represents a sprite group in pygame for all the tank. \\
+\hline
+{\em brick\+Group} & represents a sprite group in pygame for brick walls. \\
+\hline
+{\em iron\+Group} & represents a sprite group in pygame for iron walls. \\
+\hline
+{\em running\+\_\+\+T2} & represents that player\textquotesingle{}s tank is moving or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+key\+\_\+pressd represents that if the player is pressing a key. 
+
+moving2 represents the moving condition of the tank. 
+
+movdir2 represent the direction of of the tank. 
+
+my\+Tank represents the player\textquotesingle{}s tank. 
+
+all\+Tank\+Group represents a sprite group in pygame for all the tank. 
+
+brick\+Group represents a sprite group in pygame for brick walls. 
+
+iron\+Group represents a sprite group in pygame for iron walls. 
+
+running\+\_\+\+T2 represents that player\textquotesingle{}s tank is moving or not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{my_tank_control_8py_a7fc73855aff3b9b1be2770c5dd103921}\label{my_tank_control_8py_a7fc73855aff3b9b1be2770c5dd103921}} 
+\index{myTankControl.py@{myTankControl.py}!operatePlayerME@{operatePlayerME}}
+\index{operatePlayerME@{operatePlayerME}!myTankControl.py@{myTankControl.py}}
+\subsubsection{\texorpdfstring{operatePlayerME()}{operatePlayerME()}}
+{\footnotesize\ttfamily def my\+Tank\+Control.\+operate\+Player\+ME (\begin{DoxyParamCaption}\item[{}]{key\+\_\+pressed,  }\item[{}]{moving,  }\item[{}]{movdir1,  }\item[{}]{my\+Tank,  }\item[{}]{all\+Tank\+Group,  }\item[{}]{bg\+Map,  }\item[{}]{running\+\_\+\+T1 }\end{DoxyParamCaption})}
+
+
+
+Implement player operation in Map Editing mode. 
+
+Read player\textquotesingle{}s key pressed and do the corresponding moving, shooting, adding brick, adding iron. 
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+pressed} & represents that if the player is pressing a key. \\
+\hline
+{\em moving} & represents the moving condition of the tank. \\
+\hline
+{\em movdir1} & represents the direction of player\textquotesingle{}s tank. \\
+\hline
+{\em my\+Tank} & represents the player\textquotesingle{}s tank. \\
+\hline
+{\em all\+Tank\+Group} & represents a sprite group in pygame for all the tank. \\
+\hline
+{\em brick\+Group} & represents a sprite group in pygame for brick walls. \\
+\hline
+{\em iron\+Group} & represents a sprite group in pygame for iron walls. \\
+\hline
+{\em running\+\_\+\+T1} & represents that player\textquotesingle{}s tank is moving or not. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+key\+\_\+pressd represents that if the player is pressing a key. 
+
+moving represents the moving condition of the tank. 
+
+movdir1 represent the direction of of the tank. 
+
+my\+Tank represents the player\textquotesingle{}s tank. 
+
+all\+Tank\+Group represents a sprite group in pygame for all the tank. 
+
+brick\+Group represents a sprite group in pygame for brick walls. 
+
+iron\+Group represents a sprite group in pygame for iron walls. 
+
+running\+\_\+\+T1 represents that player\textquotesingle{}s tank is moving or not. 
+\end{DoxyReturn}

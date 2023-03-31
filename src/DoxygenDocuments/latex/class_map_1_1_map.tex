@@ -1,0 +1,120 @@
+\hypertarget{class_map_1_1_map}{}\section{Map.\+Map Class Reference}
+\label{class_map_1_1_map}\index{Map.Map@{Map.Map}}
+
+
+\mbox{\hyperlink{class_map_1_1_map}{Map}}.  
+
+
+Inheritance diagram for Map.\+Map\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_map_1_1_map}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_map_1_1_map_a16b297030b6f61b2601cd40d2e5b5e0d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{class_map_1_1_map}{Map}}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_map_1_1_map_aff66398f6c8d1a6bcb27737cbfc6f7a5}{add\+Brick}} (self, coordinate)
+\begin{DoxyCompactList}\small\item\em add brick to the map object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_map_1_1_map_a39480d6d0752ceb6395862074222b3b4}{add\+Iron}} (self, coordinate)
+\begin{DoxyCompactList}\small\item\em add iron to the map object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_map_1_1_map_a70217ab9229c2a28f042dae7df33874b}{add\+Home}} (self, coordinate, home\+ID=0)
+\begin{DoxyCompactList}\small\item\em add home base to the map object. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_map_1_1_map_a2338f8ecffd7308bb8fbaa2fb76b4e45}{load\+Brick\+Iron}} (self, path)
+\begin{DoxyCompactList}\small\item\em load the map. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_map_1_1_map_a6ea2d6c6c1d7b6db6641c1ef00f59e85}{save\+Map}} (self, path)
+\begin{DoxyCompactList}\small\item\em save the map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_map_1_1_map_aa1dd987b5f5a71f3363bf6eca47ebe57}\label{class_map_1_1_map_aa1dd987b5f5a71f3363bf6eca47ebe57}} 
+{\bfseries brick\+Group}
+\item 
+\mbox{\Hypertarget{class_map_1_1_map_ab7e7a0c32c3f0850e443a46594fdb318}\label{class_map_1_1_map_ab7e7a0c32c3f0850e443a46594fdb318}} 
+{\bfseries iron\+Group}
+\item 
+\mbox{\Hypertarget{class_map_1_1_map_a7a3537f399cd0cd1c934fd93af83b32a}\label{class_map_1_1_map_a7a3537f399cd0cd1c934fd93af83b32a}} 
+{\bfseries home\+Group}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{class_map_1_1_map}{Map}}. 
+
+This class sets up the properties of the map objects. The map object contains brick walls, iron walls, and home bases. They can be saved in the corresponding group. After constructing the map object, new brick, iron and home base can be added into this map object. The properties of map can be loaded from a local text file, and the changed version can also be saved in the same format in a new local file. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_map_1_1_map_a16b297030b6f61b2601cd40d2e5b5e0d}\label{class_map_1_1_map_a16b297030b6f61b2601cd40d2e5b5e0d}} 
+\index{Map.Map@{Map.Map}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Map.\+Map.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{class_map_1_1_map}{Map}}. 
+
+Constructor initialize the map by initializing the brick group, iron group, and home group. 
+
+Reimplemented in \mbox{\hyperlink{class_map_1_1_p_v_p_map_a9d6a84ac6a94e5394a7157f885603a0c}{Map.\+P\+V\+P\+Map}}, and \mbox{\hyperlink{class_map_1_1_p_v_e_map_ae4a033a205c18ef5ba14c47aceb75306}{Map.\+P\+V\+E\+Map}}.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_map_1_1_map_aff66398f6c8d1a6bcb27737cbfc6f7a5}\label{class_map_1_1_map_aff66398f6c8d1a6bcb27737cbfc6f7a5}} 
+\index{Map.Map@{Map.Map}!addBrick@{addBrick}}
+\index{addBrick@{addBrick}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{addBrick()}{addBrick()}}
+{\footnotesize\ttfamily def Map.\+Map.\+add\+Brick (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{coordinate }\end{DoxyParamCaption})}
+
+
+
+add brick to the map object. 
+
+Create a brick object using the input coordinate and add it into the brick group of the map object. \mbox{\Hypertarget{class_map_1_1_map_a70217ab9229c2a28f042dae7df33874b}\label{class_map_1_1_map_a70217ab9229c2a28f042dae7df33874b}} 
+\index{Map.Map@{Map.Map}!addHome@{addHome}}
+\index{addHome@{addHome}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{addHome()}{addHome()}}
+{\footnotesize\ttfamily def Map.\+Map.\+add\+Home (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{coordinate,  }\item[{}]{home\+ID = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+add home base to the map object. 
+
+Create a home object using the input coordinate and home ID and add it into the home group of the map object. \mbox{\Hypertarget{class_map_1_1_map_a39480d6d0752ceb6395862074222b3b4}\label{class_map_1_1_map_a39480d6d0752ceb6395862074222b3b4}} 
+\index{Map.Map@{Map.Map}!addIron@{addIron}}
+\index{addIron@{addIron}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{addIron()}{addIron()}}
+{\footnotesize\ttfamily def Map.\+Map.\+add\+Iron (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{coordinate }\end{DoxyParamCaption})}
+
+
+
+add iron to the map object. 
+
+Create a iron object using the input coordinate and add it into the iron group of the map object. \mbox{\Hypertarget{class_map_1_1_map_a2338f8ecffd7308bb8fbaa2fb76b4e45}\label{class_map_1_1_map_a2338f8ecffd7308bb8fbaa2fb76b4e45}} 
+\index{Map.Map@{Map.Map}!loadBrickIron@{loadBrickIron}}
+\index{loadBrickIron@{loadBrickIron}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{loadBrickIron()}{loadBrickIron()}}
+{\footnotesize\ttfamily def Map.\+Map.\+load\+Brick\+Iron (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path }\end{DoxyParamCaption})}
+
+
+
+load the map. 
+
+Load the map based on the given file path and add all the brick and iron wall saved in that file into the map object. \mbox{\Hypertarget{class_map_1_1_map_a6ea2d6c6c1d7b6db6641c1ef00f59e85}\label{class_map_1_1_map_a6ea2d6c6c1d7b6db6641c1ef00f59e85}} 
+\index{Map.Map@{Map.Map}!saveMap@{saveMap}}
+\index{saveMap@{saveMap}!Map.Map@{Map.Map}}
+\subsubsection{\texorpdfstring{saveMap()}{saveMap()}}
+{\footnotesize\ttfamily def Map.\+Map.\+save\+Map (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path }\end{DoxyParamCaption})}
+
+
+
+save the map. 
+
+Save the map to the given file path and add all the brick and iron wall saved in the map object into the corresponding file. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_map_8py}{Map.\+py}}\end{DoxyCompactItemize}

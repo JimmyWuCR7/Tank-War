@@ -1,0 +1,2849 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{ulem}
+\usepackage[section]{placeins}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Test Plan\\TankWar}
+
+\author{Team \#212, Genius
+		\\Di Wu, 400117248, wud43 
+		\\Jiahao Zhou, 400082351, zhouj56 
+		\\Xinyu Huang, 400120376, huangx65
+}
+
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+23 Febrary 2020 & 1.0 & Create the first version of the Test Plan\\
+28 Febrary 2020 & 1.1 & Finish all the parts of the Test Plan\\
+\textcolor{red}{3 April 2020} & \textcolor{red}{2.0} & \textcolor{red}{According to the comments and rubrics from TA to the vision 0 Test plan, the new test plan is updated. The functional and nonfunctional testing are changed more reasonable. Moreover, more unit tests are added into the test plan. The questions on the usability survey are edited to be clearer and new questions are added.}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document describes the test plan for TankWar. The template for the test plan is from SE 3XA3 course.
+
+\section{General Information}
+
+\subsection{Purpose}
+The purpose of testing is to make sure the new game work properly on Windows and Mac OS X system.
+\subsection{Scope}
+The test plan states the testing rules and specific test cases to evaluate the functionality of the TankWar game. The objective of this document is to check whether the game meets the functional and non-functional requirements, and proof of concept in the \underline{SRS}. The test plan can also be referred as the outline of the testing procedure to perform the tests. 
+\subsection{Acronyms, Abbreviations, and Symbols}
+	
+\begin{table}[h]
+\caption{\textbf{Table of Abbreviations}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+GUI & Graphical User Interface\\ \hline
+PVP & Player1 Versus Player2\\ \hline
+PVE & Player1 and Player2 Versus Environment\\ \hline
+SRS & Software Requirements Specification\\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\begin{table}[h]
+\caption{\textbf{Table of Definitions}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Term} & \textbf{Definition}\\
+\midrule
+Developers & The team members.\\ \hline
+Project & TankWar project. Recreate and upgrade the original game BattleCity.\\ \hline
+Functional Testing & Testing derived from a description of how the program functions.\\ \hline
+Dynamic Testing & Testing which includes test cases run during execution.\\ \hline
+Static Testing & Testing that does not involve program execution.\\ \hline
+Manual Testing & Testing conducted by people.\\ \hline
+Automated Testing & Testing that run automatically by software.\\
+
+\bottomrule
+\end{tabularx}
+
+\end{table}	
+\newpage
+\subsection{Overview of Document}
+The document states the plan for testing the functional requirements, non-functional requirements, and proof of concept designed for the TankWar project in specific methods and metrics. 
+\section{Plan}
+	
+\subsection{Software Description}
+The TankWar project will recreate and upgrade the open source project for BattleCity, the new game will keep all the original functionality which allows two players to fight against enemy tanks. Also, two new modes and three new types of tank will be added. The two new modes include \underline{PVP} and map editing, which allow two players fight against each other and design their own maps, respectively. The new tanks added are DoubleLife tank, Fast tank, and FastBullet tank.
+\subsection{Test Team}
+The test team include all the group members, who are Xinyu Huang, Di Wu, and Jiahao Zhou.
+\subsection{Automated Testing Approach}
+The python unittest will be used to do the automated tests.
+\subsection{Testing Tools}
+Python unittest will be used for automated unit tests, and the python coverage tool coverage.py will be used to calculate the path, branch, statement coverage.
+\subsection{Testing Schedule}
+		
+See Gantt Chart at the following url
+%TankWarSchedule.pdf
+%\attachfile{../../ProjectSchedule/TankWarSchedule.pdf}\\
+%TankWarSchedule.gan
+%\attachfile{../../ProjectSchedule/TankWarSchedule.gan}
+
+\section{System Test Description}
+
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{Area of Testing1 for Tank Movements}
+
+\paragraph{Test for Going Up}
+
+\begin{enumerate}
+
+\item{MT-GU-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "W" key held by player 1.
+					
+Output: Player 1's tank goes up, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go up if the player 1 holds "W" key from the keyboard. 
+					
+\item{MT-GU-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "W" key pressed by player 1.
+					
+Output: Player 1's tank goes up by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go up for 1 unit of length if the player 1 presses "W" key once from the keyboard. 
+
+\item{MT-GU-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "W" key held by player 1.
+					
+Output: Player 1's double-life tank still goes up, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move up by holding the "W" key from the keyboard.
+
+\item{MT-GU-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "W" key pressed by player 1.
+					
+Output: Player 1's double-life tank still goes up by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move up for 1 unit of length by pressing the "W" key from the keyboard.
+
+\item{MT-GU-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Upward Arrow key held by player 2.
+					
+Output: Player 2's tank goes up, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go up if the player 2 holds upward arrow key from the keyboard. 
+					
+\item{MT-GU-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Upward arrow key pressed by player 2.
+					
+Output: Player 2's tank goes up by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go up for 1 unit of length if the player 2 presses upward arrow key once from the keyboard. 
+
+\item{MT-GU-7\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Upward arrow key held by player 2.
+					
+Output: Player 2's double-life tank still goes up, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move up by holding the upward arrow key from the keyboard.
+
+\item{MT-GU-8\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Upward arrow key pressed by player 2.
+					
+Output: Player 2's double-life tank still goes up by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move up for 1 unit of length by pressing the upward arrow key from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for Going Down}
+
+\begin{enumerate}
+
+\item{MT-GD-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "S" key held by player 1.
+					
+Output: Player 1's tank goes down, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go down if the player 1 holds "S" key from the keyboard. 
+					
+\item{MT-GD-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "S" key pressed by player 1.
+					
+Output: Player 1's tank goes down by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go down for 1 unit of length if the player 1 presses "S" key once from the keyboard. 
+
+\item{MT-GD-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "S" key held by player 1.
+					
+Output: Player 1's double-life tank still goes down, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move down by holding the "S" key from the keyboard.
+
+\item{MT-GD-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "S" key pressed by player 1.
+					
+Output: Player 1's double-life tank still goes down by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move down for 1 unit of length by pressing the "S" key from the keyboard.
+
+\item{MT-GD-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Downward Arrow key held by player 2.
+					
+Output: Player 2's tank goes down, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go down if the player 2 holds downward arrow key from the keyboard. 
+					
+\item{MT-GD-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Downward arrow key pressed by player 2.
+					
+Output: Player 2's tank goes down by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go down for 1 unit of length if the player 2 presses downward arrow key once from the keyboard. 
+
+\item{MT-GD-7\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Downward arrow key held by player 2.
+					
+Output: Player 2's double-life tank still goes down, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move down by holding the downward arrow key from the keyboard.
+
+\item{MT-GD-8\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Downward arrow key pressed by player 2.
+					
+Output: Player 2's double-life tank still goes down by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move down for 1 unit of length by pressing the downward arrow key from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for Going Left}
+
+\begin{enumerate}
+
+\item{MT-GL-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "A" key held by player 1.
+					
+Output: Player 1's tank goes left, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go left if the player 1 holds "A" key from the keyboard. 
+					
+\item{MT-GL-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "A" key pressed by player 1.
+					
+Output: Player 1's tank goes left by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go left for 1 unit of length if the player 1 presses "A" key once from the keyboard. 
+
+\item{MT-GL-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "A" key held by player 1.
+					
+Output: Player 1's double-life tank still goes left, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move left by holding the "A" key from the keyboard.
+
+\item{MT-GL-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "A" key pressed by player 1.
+					
+Output: Player 1's double-life tank still goes left by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move left for 1 unit of length by pressing the "A" key from the keyboard.
+
+\item{MT-GL-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Leftwards Arrow key held by player 2.
+					
+Output: Player 2's tank goes left, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go left if the player 2 holds leftwards arrow key from the keyboard. 
+					
+\item{MT-GL-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: leftwards arrow key pressed by player 2.
+					
+Output: Player 2's tank goes left by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go left for 1 unit of length if the player 2 presses leftwards arrow key once from the keyboard. 
+
+\item{MT-GL-7\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Leftwards arrow key held by player 2.
+					
+Output: Player 2's double-life tank still goes left, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move left by holding the leftwards arrow key from the keyboard.
+
+\item{MT-GL-8\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Leftwards arrow key pressed by player 2.
+					
+Output: Player 2's double-life tank still goes left by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move left for 1 unit of length by pressing the leftwards arrow key from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for Going Right}
+
+\begin{enumerate}
+
+\item{MT-GR-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "D" key held by player 1.
+					
+Output: Player 1's tank goes right, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go right if the player 1 holds "D" key from the keyboard. 
+					
+\item{MT-GR-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "D" key pressed by player 1.
+					
+Output: Player 1's tank goes right by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go right by 1 unit of length if the player 1 presses "D" key once from the keyboard. 
+
+\item{MT-GR-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "D" key held by player 1.
+					
+Output: Player 1's double-life tank still goes right, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move right by holding the "D" key from the keyboard.
+
+\item{MT-GR-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: "D" key pressed by player 1.
+					
+Output: Player 1's double-life tank still goes right by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 1 can still let the tank move right for 1 unit of length by pressing the "D" key from the keyboard.
+
+\item{MT-GR-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Rightwards Arrow key held by player 2.
+					
+Output: Player 2's tank goes right, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go right if the player 2 holds rightwards arrow key from the keyboard. 
+					
+\item{MT-GR-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Rightwards arrow key pressed by player 2.
+					
+Output: Player 2's tank goes right by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the game starts, the corresponding tank should go right for 1 unit of length if the player 2 presses rightwards arrow key once from the keyboard. 
+
+\item{MT-GR-7\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Rightwards arrow key held by player 2.
+					
+Output: Player 2's double-life tank still goes right, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move right by holding the rightwards arrow key from the keyboard.
+
+\item{MT-GR-8\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank is shot by a bullet and the ultimate skill is activated.
+					
+Input: Rightwards arrow key pressed by player 2.
+					
+Output: Player 2's double-life tank still goes right by 1 unit of length, which is shown on the screen.
+					
+How test will be performed: After the double-life tank is shot and the ultimate skill is activated, the tank can ignore any damages for 1 second and player 2 can still let the tank move right for 1 unit of length by pressing the rightwards arrow key from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for Walls and Boundaries}
+
+\begin{enumerate}
+
+\item{MT-WB-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 1's tank is facing to a brick wall and there is no distance between the tank and the wall. Player 1 presses the corresponding key from "WASD" keys in order to make the tank move towards the brick wall.
+					
+Output: Player 1's tank does not move.
+					
+How test will be performed: After the game starts, player 1's tank should not be moving if player 1 controls the tank and tries to move the tank through a brick wall using "WASD" keys from the keyboard.
+
+\item{MT-WB-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 1's tank is facing to a iron wall and there is no distance between the tank and the wall. Player 1 presses the corresponding key from "WASD" keys in order to make the tank move towards the iron wall.
+					
+Output: Player 1's tank does not move.
+					
+How test will be performed: After the game starts, player 1's tank should not be moving if player 1 controls the tank and tries to move the tank through a iron wall using "WASD" keys from the keyboard.
+
+\item{MT-WB-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 2's tank is facing to a brick wall and there is no distance between the tank and the wall. Player 2 presses the corresponding key from arrow keys in order to make the tank move towards the brick wall.
+					
+Output: Player 2's tank does not move.
+					
+How test will be performed: After the game starts, player 2's tank should not be moving if player 2 controls the tank and tries to move the tank through a brick wall using arrow keys from the keyboard.
+
+\item{MT-WB-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 2's tank is facing to a iron wall and there is no distance between the tank and the wall. Player 2 presses the corresponding key from arrow keys in order to make the tank move towards the iron wall.
+					
+Output: Player 2's tank does not move.
+					
+How test will be performed: After the game starts, player 2's tank should not be moving if player 2 controls the tank and tries to move the tank through a iron wall using arrow keys from the keyboard.
+
+\item{MT-WB-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 2's tank is facing to the boundary of the map and there is no distance between the tank and the boundary. Player 2 presses the corresponding key from arrow keys in order to make the tank move towards the boundary.
+					
+Output: Player 2's tank does not move.
+					
+How test will be performed: After the game starts, player 2's tank should not be moving if player 2 controls the tank and tries to move the tank out of the map using arrow keys from the keyboard.
+
+\item{MT-WB-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player 1's tank is facing to the boundary of the map and there is no distance between the tank and the boundary. Player 1 presses the corresponding key from "WASD" keys in order to make the tank move towards the boundary.
+					
+Output: Player 1's tank does not move.
+					
+How test will be performed: After the game starts, player 1's tank should not be moving if player 1 controls the tank and tries to move the tank out of the map using "WASD" keys from the keyboard.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing2 for Tank Attacking}
+
+\paragraph{Test for Shooting Bullets}
+
+\begin{enumerate}
+
+\item{TAT-SB-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "J" key pressed by player 1.
+					
+Output: Player 1's tank shoots a bullet.
+					
+How test will be performed: After the game starts, the corresponding tank should shoot a bullet if player 1 presses "J" key from the keyboard.
+
+\item{TAT-SB-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "J" key held by player 1.
+					
+Output: Player 1's tank shoots bullets continuously. 
+					
+How test will be performed: After the game starts, the corresponding tank should shoot bullets continuously if player 1 holds "J" key from the keyboard.
+
+\item{TAT-SB-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "," key pressed by player 2.
+					
+Output: Player 2's tank shoots a bullet.
+					
+How test will be performed: After the game starts, the corresponding tank should shoot a bullet if player 2 presses "," key from the keyboard.
+
+\item{TAT-SB-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "," key held by player 2.
+					
+Output: Player 2's tank shoots bullets continuously. 
+					
+How test will be performed: After the game starts, the corresponding tank should shoot bullets continuously if player 2 holds "," key from the keyboard.
+
+\item{TAT-SB-5\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank get shot for the first time.
+					
+Input: "," key held by player 2.
+					
+Output: Player 2's double-life tank still shoots bullets continuously.
+					
+How test will be performed: After the double-life tank get shot for the first time, the corresponding tank should still shoot bullets continuously if player 2 holds "," key from the keyboard.
+
+\item{TAT-SB-6\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank get shot for the first time.
+					
+Input: "J" key held by player 1.
+					
+Output: Player 1's double-life tank still shoots bullets continuously.
+					
+How test will be performed: After the double-life tank get shot for the first time, the corresponding tank should still shoot bullets continuously if player 1 holds "J" key from the keyboard.
+
+\item{TAT-SB-7\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank get shot for the first time.
+					
+Input: "," key pressed by player 2.
+					
+Output: Player 2's double-life tank still shoots a bullet.
+					
+How test will be performed: After the double-life tank get shot for the first time, the corresponding tank should still shoot a bullet if player 2 presses "," key from the keyboard.
+
+\item{TAT-SB-8\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the double-life tank get shot for the first time.
+					
+Input: "J" key pressed by player 1.
+					
+Output: Player 1's double-life tank still shoots a bullet.
+					
+How test will be performed: After the double-life tank get shot for the first time, the corresponding tank should still shoot a bullet if player 1 presses "J" key from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for Using Ultimate Skills}
+
+\begin{enumerate}
+
+\item{TAT-UUS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "K" key pressed by player 1.
+					
+Output: Player 1's tank use ultimate skills.
+					
+How test will be performed: After the game starts, the corresponding tank should use the corresponding ultimate skill if player 1 presses "K" key from the keyboard.
+
+\item{TAT-UUS-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "." key pressed by player 2.
+					
+Output: Player 2's tank use ultimate skills.
+					
+How test will be performed: After the game starts, the corresponding tank should use the corresponding ultimate skill if player 2 presses "." key from the keyboard.
+
+\item{TAT-UUS-3\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "K" key held by player 1.
+					
+Output: \textcolor{red}{\sout{Player 1's tank use ultimate skills just once.}} \textcolor{red}{Player 1's tank use ultimate skills continuously.}
+					
+How test will be performed: \textcolor{red}{\sout{After the game starts, the corresponding tank should use the corresponding ultimate skill just once even if player 1 holds "K" key from the keyboard.}} \textcolor{red}{After the game starts, the corresponding tank should use the corresponding ultimate skill continuously if player 1 holds "K" key from the keyboard.}
+
+\item{TAT-UUS-4\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: "." key held by player 2.
+					
+Output: \textcolor{red}{\sout{Player 2's tank use ultimate skills just once.}} \textcolor{red}{Player 2's tank use ultimate skills continuously.}
+					
+How test will be performed: \textcolor{red}{\sout{After the game starts, the corresponding tank should use the corresponding ultimate skill just once even if player 2 holds "K" key from the keyboard.}} \textcolor{red}{After the game starts, the corresponding tank should use the corresponding ultimate skill continuously if player 2 holds "K" key from the keyboard.}
+
+\end{enumerate}
+
+\subsubsection{Area of Testing3 for Tank Properties}
+
+\paragraph{Test for Double-Life Tank}
+
+\begin{enumerate}
+
+\item{TPT-DLT-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player chooses double-life tank before Entering the game and the player presses "K" key or "." key to activate the ultimate skill.
+					
+Output: The double-life tank is still alive when the ultimate skill is activated and the tank gets shot simultaneously.
+					
+How test will be performed: After the game starts, the double-life tank should be still alive if the enemy tank shoots the double-life tank and the player presses "K" key or "." key on the keyboard to activate the ultimate skill which protects the double-life tank from any damages. After 1 second, the damages should be fatal to the double-life tank.
+
+\end{enumerate}
+
+\paragraph{Test for High-Speed Tank}
+
+\begin{enumerate}
+
+\item{TPT-HST-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player chooses high-speed tank before Entering the game and the player presses "K" key or "." key to activate the ultimate skill.
+					
+Output: During the tank movement, the tank rushes for \textcolor{red}{\sout{2 seconds}} \textcolor{red}{1 second} after the ultimate skill is activated. The direction can be changed by the player during the rushing process by pressing another key on the keyboard.
+					
+How test will be performed: After the game starts, the high-speed tank should be able to rush for \textcolor{red}{\sout{2 seconds}} \textcolor{red}{1 second} when the player presses "K" key or "." key on the keyboard to activate the ultimate skill. During the rushing process, player 1 or player 2 can change the rushing direction by pressing "WASD" or arrow keys respectively on the keyboard. After \textcolor{red}{\sout{2 seconds}} \textcolor{red}{1 second}, the high-speed tank should not have the ability of rushing.
+
+\end{enumerate}
+
+\paragraph{Test for Double-Bullet Tank}
+
+\begin{enumerate}
+
+\item{TPT-DBT-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: After the game starts.
+					
+Input: Player chooses double-bullet tank before Entering the game and the player presses "K" key or "." key on the keyboard to activate the ultimate skill.
+					
+Output: During attacking, the double-bullet tank shoots two bullets simultaneously when the ultimate skill activates. 
+					
+How test will be performed: After the game starts, the double-bullet tank should be able to shoot two bullets simultaneously when the player presses "K" key or "." key on the keyboard to activate the ultimate skill. The ultimate skill should allow the tank to shoot double bullets once. After that, there should only be one bullet coming out from the double-bullet tank per shooting.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing4 for Gaming Process}
+
+\paragraph{Test for \underline{PVP} Mode Selection}
+
+\begin{enumerate}
+
+\item{GPT-PPMS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software.
+					
+Input: Player 1 selects \underline{PVP} mode using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The \underline{PVP} map loading section shows on the screen.
+					
+How test will be performed: After opening the software, there should be three modes for player 1 to choose. If the player 1 chooses \underline{PVP} mode, there should be the interface for \underline{PVP} \textcolor{red}{\sout{map selection}} \textcolor{red}{tank selection} shown on the screen. 
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVE} Mode Selection}
+
+\begin{enumerate}
+
+\item{GPT-PEMS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software.
+					
+Input: Player 1 selects \underline{PVE} mode using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The \underline{PVE} map loading section shows on the screen.
+					
+How test will be performed: After opening the software, there should be three modes for player 1 to choose. If the player 1 chooses \underline{PVE} mode, there should be the interface for \underline{PVE} \textcolor{red}{\sout{map selection}} \textcolor{red}{tank selection} shown on the screen. 
+
+\end{enumerate}
+
+\paragraph{Test for Map Editing Mode Selection}
+
+\begin{enumerate}
+
+\item{GPT-MEMS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software.
+					
+Input: Player 1 selects map editing mode using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The map editing interface shows on the screen.
+					
+How test will be performed: After opening the software, there should be three modes for player 1 to choose. If the player 1 chooses map editing mode, there should be the interface for \textcolor{red}{\sout{map editing}} \textcolor{red}{map selection} shown on the screen\sout{, which allows the player to do further operations like add and delete walls}.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVP} Map Loading}
+
+\begin{enumerate}
+
+\item{GPT-PPML-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software and selects \underline{PVP} mode using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Input: Player 1 selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section.
+					
+Output: The selected \underline{PVP} map shows on the screen.
+					
+How test will be performed: After opening the software and selecting \underline{PVP} mode using "J" key as the button of confirming from the keyboard, the system should load the corresponding \underline{PVP} map and show on the screen if player 1 selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section by pressing "J" key as the button of confirming from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVE} Map Loading}
+
+\begin{enumerate}
+
+\item{GPT-PEML-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software and selects \underline{PVE} mode using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Input: Player 1 selects one of the \underline{PVE} maps in the \underline{PVE} map selecting section.
+					
+Output: The selected \underline{PVE} map shows on the screen.
+					
+How test will be performed: After opening the software and selecting \underline{PVE} mode using "J" key as the button of confirming from the keyboard, the system should load the corresponding \underline{PVE} map and show on the screen if player 1 selects one of the \underline{PVE} maps in the \underline{PVE} map selecting section by pressing "J" key as the button of confirming from the keyboard.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVP} Tank Selection}
+
+\begin{enumerate}
+
+\item{GPT-PPTS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software, selects \underline{PVP} mode, \textcolor{red}{\sout{and selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section}} by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+\textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key}Player 1 chooses one from three different kinds of tanks by using "J" key as the button of confirming from the keyboard.
+					
+Output: The corresponding tank shows on the selected \underline{PVP} map.
+					
+How test will be performed: After opening the software, selecting \underline{PVP} mode, and selecting one of the \underline{PVP} maps, the system should show a tank selection interface which allows player 1 to choose a tank among three different kinds of tanks by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{RETURN key} as the button of confirming from the keyboard. After choosing, the corresponding tank should show on the selected \underline{PVP} map.
+
+
+\item{GPT-PPTS-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software, selects \underline{PVP} mode, \textcolor{red}{\sout{and selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section}} by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Input: Player 2 chooses one from three different kinds of tanks using \textcolor{red}{\sout{"," key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The corresponding tank shows on the selected \underline{PVP} map.
+					
+How test will be performed: After opening the software, selecting \underline{PVP} mode, and selecting one of the \underline{PVP} maps, the system should show a tank selection interface which allows player 2 to choose a tank among three different kinds of tanks using \textcolor{red}{\sout{"," key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard. After choosing, the corresponding tank should show on the selected \underline{PVP} map.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVE} Tank Selection}
+
+\begin{enumerate}
+
+\item{GPT-PETS-1\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software, selects \underline{PVE} mode, \textcolor{red}{\sout{and selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section}} by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Input: Player 1 chooses one from three different kinds of tanks by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The corresponding tank shows on the selected \underline{PVE} map.
+					
+How test will be performed: After opening the software, selecting \underline{PVE} mode, and selecting one of the \underline{PVE} maps, the system should show a tank selection interface which allows player 1 to choose a tank among three different kinds of tanks. After choosing, the corresponding tank should show on the selected \underline{PVE} map.
+
+\item{GPT-PETS-2\\}
+
+Type: Manual, Dynamic, Functional
+					
+Initial State: Player 1 opens the software, selects \underline{PVE} mode, \textcolor{red}{\sout{and selects one of the \underline{PVP} maps in the \underline{PVP} map selecting section}} by using \textcolor{red}{\sout{"J" key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Input: Player 2 chooses one from three different kinds of tanks using \textcolor{red}{\sout{"," key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard.
+					
+Output: The corresponding tank shows on the selected \underline{PVE} map.
+					
+How test will be performed: After opening the software, selecting \underline{PVE} mode, and selecting one of the \underline{PVE} maps, the system should show a tank selection interface which allows player 2 to choose a tank among three different kinds of tanks using \textcolor{red}{\sout{"," key}} \textcolor{red}{Enter key} as the button of confirming from the keyboard. After choosing, the corresponding tank should show on the selected \underline{PVE} map.
+
+\end{enumerate}
+
+
+
+
+\subsubsection{Area of Testing5 for Map Editing}
+
+\paragraph{Test for Adding Brick Wall for \underline{PVP} Map}
+
+\begin{enumerate}
+
+\item{ME-\underline{PVP}AB-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and there is empty space in front of the player's tank.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: A brick wall is added right in front of the player's tank.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and player's tank will stay at a location with at least one unit of empty space in front of it, then the "K" key will be pressed and check if a brick wall is correctly added to that empty unit.
+					
+\item{ME-\underline{PVP}AB-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing to a brick wall.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with a existing brick wall, then the "K" key will be pressed and check if nothing is changed.
+
+\item{ME-PVPAB-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing to a iron wall.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with a existing iron wall, then the "K" key will be pressed and check if nothing is changed.
+
+\item{ME-PVPAB-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing the boundary of the map.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with the boundary of the map, then the "K" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Adding Iron Wall for \underline{PVP} Map}
+
+\begin{enumerate}
+
+\item{ME-PVPAI-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and there is empty space in front of the player's tank.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: A iron wall is added right in front of the player's tank.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and player's tank will stay at a location with at least one unit of empty space in front of it, then the "L" key will be pressed and check if a iron wall is correctly added to that empty unit.
+
+\item{ME-PVPAI-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing to a brick wall.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with a existing brick wall, then the "L" key will be pressed and check if nothing is changed.
+
+\item{ME-PVPAI-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing to a iron wall.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with a existing iron wall, then the "L" key will be pressed and check if nothing is changed.
+
+\item{ME-PVPAI-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is facing to the boundary of the map.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to face to and with no distance with the boundary of the map, then the "L" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Deleting Wall for \underline{PVP} Map}
+
+\begin{enumerate}
+
+\item{ME-PVPDW-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is aim at a brick wall.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: The brick wall is deleted from the map.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to aim at a brick wall, then the "J" key will be pressed and check if the brick wall is deleted.
+
+\item{ME-PVPDW-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is aim at a iron wall.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: The iron wall is deleted from the map.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to aim at a iron wall, then the "J" key will be pressed and check if the iron wall is deleted.
+
+\item{ME-PVPDW-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVP} mode is running, and the player's tank is aim at nothing.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: Nothing is changed in the map.
+					
+How test will be performed: The map editing for \underline{PVP} mode will be run and the player's tank will be moved to aim at nothing, then the "J" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Adding Brick Wall for \underline{PVE} Map}
+
+\begin{enumerate}
+
+\item{ME-PVEAB-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and there is empty space in front of the player's tank.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: A brick wall is added right in front of the player's tank.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and player's tank will stay at a location with at least one unit of empty space in front of it, then the "K" key will be pressed and check if a brick wall is correctly added to that empty unit.
+					
+\item{ME-PVEAB-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing to a brick wall.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with a existing brick wall, then the "K" key will be pressed and check if nothing is changed.
+
+\item{ME-PVEAB-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing to a iron wall.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with a existing iron wall, then the "K" key will be pressed and check if nothing is changed.
+
+\item{ME-PVEAB-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing the boundary of the map.
+					
+Input: \textcolor{red}{\sout{"K" key pressed.}} \textcolor{red}{"J" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with the boundary of the map, then the "K" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Adding Iron Wall for \underline{PVE} Map}
+
+\begin{enumerate}
+
+\item{ME-PVEAI-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and there is empty space in front of the player's tank.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: A iron wall is added right in front of the player's tank.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and player's tank will stay at a location with at least one unit of empty space in front of it, then the "L" key will be pressed and check if a iron wall is correctly added to that empty unit.
+
+\item{ME-PVEAI-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing to a brick wall.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with a existing brick wall, then the "L" key will be pressed and check if nothing is changed.
+
+\item{ME-PVEAI-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing to a iron wall.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with a existing iron wall, then the "L" key will be pressed and check if nothing is changed.
+
+\item{ME-PVEAI-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is facing to the boundary of the map.
+					
+Input: \textcolor{red}{\sout{"L" key pressed.}} \textcolor{red}{"K" key pressed}
+					
+Output: Nothing is changed.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to face to and with no distance with the boundary of the map, then the "L" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Deleting Wall for \underline{PVE} Map}
+
+\begin{enumerate}
+
+\item{ME-PVEDW-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is aim at a brick wall.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: The brick wall is deleted from the map.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to aim at a brick wall, then the "J" key will be pressed and check if the brick wall is deleted.
+
+\item{ME-PVEDW-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is aim at a iron wall.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: The iron wall is deleted from the map.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to aim at a iron wall, then the "J" key will be pressed and check if the iron wall is deleted.
+
+\item{ME-PVEDW-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The map editing for \underline{PVE} mode is running, and the player's tank is aim at nothing.
+					
+Input: \textcolor{red}{\sout{"J" key pressed.}} \textcolor{red}{"L" key pressed}
+					
+Output: Nothing is changed in the map.
+					
+How test will be performed: The map editing for \underline{PVE} mode will be run and the player's tank will be moved to aim at nothing, then the "J" key will be pressed and check if nothing is changed.
+
+\end{enumerate}
+
+\paragraph{Test for Saving Maps for \underline{PVP}}
+
+\begin{enumerate}
+
+\item{ME-PVPSM-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The player is in map editing mode and a map is created.
+					
+Input: Press the "Enter" key, then \textcolor{red}{\sout{Enter a valid file name and} select the existing files and } press "Enter" key again.
+					
+Output: A file stands for the map created is shown in the folder for \underline{PVP} maps.
+					
+How test will be performed: Create a map in map editing mode, then press "Enter" key and Enter the file name. Press the "Enter" again and check if the map file is correctly saved in the folder for \underline{PVP} maps.
+
+\end{enumerate}
+
+\paragraph{Test for Saving Maps for \underline{PVE}}
+
+\begin{enumerate}
+
+\item{ME-\underline{PVE}SM-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The player is in map editing mode and a map is created.
+					
+Input: Press the "Enter" key, then \textcolor{red}{\sout{Enter a valid file name and} select the existing files and } press "Enter" key again.
+					
+Output: A file stands for the map created is shown in the folder for \underline{PVE} maps.
+					
+How test will be performed: Create a map in map editing mode, then press "Enter" key and Enter the file name. Press the "Enter" again and check if the map file is correctly saved in the folder for \underline{PVE} maps.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing6 for Game Rules}
+
+\paragraph{Test for General Rules about the Wall}
+
+\begin{enumerate}
+
+\item{GR-GRW-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts. 
+					
+Input: Player 1 presses "J" key from the keyboard to shoot a bullet towards the brick wall and the bullet hits the brick wall.
+					
+Output: The brick wall is destroyed by the bullet. The bullet and the brick wall disappear simultaneously.
+					
+How test will be performed: After \underline{PVP} game starts, the brick wall should be destroyed if player 1 presses "J" key from the keyboard to shoot a bullet towards the brick wall. After the bullet hits the brick wall, the bullet and the brick wall should disappear at the same time and the tank should be able to move through the location of the destroyed brick wall.
+
+\item{GR-GRW-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: Player 1 presses "J" key from the keyboard to shoot a bullet towards the brick wall and the bullet hits the brick wall.
+					
+Output: The brick wall is destroyed by the bullet. The bullet and the brick wall disappear simultaneously.
+					
+How test will be performed: After \underline{PVE} game starts, the brick wall should be destroyed if player 1 presses "J" key from the keyboard to shoot a bullet towards the brick wall. After the bullet hits the brick wall, the bullet and the brick wall should disappear at the same time and the tank should be able to move through the location of the destroyed brick wall.
+
+\item{GR-GRW-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: Player 2 presses "," key from the keyboard to shoot a bullet towards the brick wall and the bullet hits the brick wall.
+					
+Output: The brick wall is destroyed by the bullet. The bullet and the brick wall disappear simultaneously.
+					
+How test will be performed: After \underline{PVE} game starts, the brick wall should be destroyed if player 2 presses "," key from the keyboard to shoot a bullet towards the brick wall. After the bullet hits the brick wall, the bullet and the brick wall should disappear at the same time and the tank should be able to move through the location of the destroyed brick wall.
+
+\item{GR-GRW-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts. 
+					
+Input: Player 2 presses "," key from the keyboard to shoot a bullet towards the brick wall and the bullet hits the brick wall.
+					
+Output: The brick wall is destroyed by the bullet. The bullet and the brick wall disappear simultaneously.
+					
+How test will be performed: After \underline{PVP} game starts, the brick wall should be destroyed if player 2 presses "," key from the keyboard to shoot a bullet towards the brick wall. After the bullet hits the brick wall, the bullet and the brick wall should disappear at the same time and the tank should be able to move through the location of the destroyed brick wall.
+
+
+
+
+\item{GR-GRW-5\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts. 
+					
+Input: Player 1 presses "J" key from the keyboard to shoot a bullet towards the iron wall and the bullet hits the iron wall.
+					
+Output: The iron wall is not destroyed by the bullet. The bullet disappear.
+					
+How test will be performed: After \underline{PVP} game starts, the iron wall should not be destroyed if player 1 presses "J" key from the keyboard to shoot a bullet towards the iron wall. After the bullet hits the iron wall, the bullet should disappear and the iron wall should be still at the original location.
+
+\item{GR-GRW-6\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: Player 1 presses "J" key from the keyboard to shoot a bullet towards the iron wall and the bullet hits the iron wall.
+					
+Output: The iron wall is not destroyed by the bullet. The bullet disappear.
+					
+How test will be performed: After \underline{PVE} game starts, the iron wall should not be destroyed if player 1 presses "J" key from the keyboard to shoot a bullet towards the iron wall. After the bullet hits the iron wall, the bullet should disappear and the iron wall should be still at the original location.
+
+\item{GR-GRW-7\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: Player 2 presses "," key from the keyboard to shoot a bullet towards the iron wall and the bullet hits the iron wall.
+					
+Output: The iron wall is not destroyed by the bullet. The bullet disappear.
+					
+How test will be performed: After \underline{PVE} game starts, the iron wall should not be destroyed if player 2 presses "," key from the keyboard to shoot a bullet towards the iron wall. After the bullet hits the iron wall, the bullet should disappear and the iron wall should be still at the original location.
+
+\item{GR-GRW-8\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts. 
+					
+Input: Player 2 presses "," key from the keyboard to shoot a bullet towards the iron wall and the bullet hits the iron wall.
+					
+Output: The iron wall is not destroyed by the bullet. The bullet disappear.
+					
+How test will be performed: After \underline{PVP} game starts, the iron wall should not be destroyed if player 2 presses "," key from the keyboard to shoot a bullet towards the iron wall. After the bullet hits the iron wall, the bullet should disappear and the iron wall should be still at the original location.
+
+\end{enumerate}
+
+\paragraph{Test for General Rules about Buff}
+
+\begin{enumerate}
+
+\item{\textcolor{red}{\sout{GR-GRB-1}}\\}
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: After the \underline{PVP} game starts. }}
+					
+\textcolor{red}{\sout{Input: Two players Enter the \underline{PVP} game successfully.}}
+					
+\textcolor{red}{\sout{Output: Different buffs randomly appear in the different locations of the map during a random time period.}}
+					
+\textcolor{red}{\sout{How test will be performed: After \underline{PVP} game starts, the system should offer buffs in random locations of the map and during the random time period. There should be three kinds of buffs that the system can offer: moving speed-enhanced buff, wall-enhanced buff, and bullet-speed-enhanced buff.}}
+
+\item{GR-GRB-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: Two players Enter the \underline{PVE} game successfully.
+					
+Output: Different buffs randomly appear in the different locations of the map during a random time period.
+					
+How test will be performed: After \underline{PVE} game starts, the system should offer buffs in random locations of the map and during the random time period. There should be three kinds of buffs that the system can offer: moving speed-enhanced buff, wall-enhanced buff, and bullet-speed-enhanced buff.
+
+\item{\textcolor{red}{\sout{GR-GRB-3}}\\}
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: After the \underline{PVP} game starts. }}
+					
+\textcolor{red}{\sout{Input: The player gets the moving-speed-enhanced buff during the battle.}}
+					
+\textcolor{red}{\sout{Output: The player's tank gets a higher speed after getting the moving-speed-enhanced buff. The moving-speed-enhanced buff disappear after the player's tank gets it.}}
+					
+\textcolor{red}{\sout{How test will be performed: After \underline{PVP} game starts, the corresponding tank will get a higher speed after the player controls the tank to get the moving-speed-enhanced buff. The moving-speed-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the speed of the tank should go back to normal.}}
+
+
+\item{\textcolor{red}{\sout{GR-GRB-4}}\\}
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: After the \underline{PVP} game starts. }}
+					
+\textcolor{red}{\sout{Input: The player gets the wall-enhanced buff during the battle.}}
+					
+\textcolor{red}{\sout{Output: The player's home base is surrounded by iron walls instead of brick walls. The wall-enhanced buff disappears after the player's tank gets it.}}
+					
+\textcolor{red}{\sout{How test will be performed: After \underline{PVP} game starts, the corresponding player's home base should get surrounded by iron walls if the player controls the tank to get a wall-enhanced buff. Iron walls can withstand any damages. The wall-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the home base will be surrounded by normal brick walls again.}}
+
+\item{\textcolor{red}{\sout{GR-GRB-5}}\\}
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: After the \underline{PVP} game starts. }}
+					
+\textcolor{red}{\sout{Input: The player gets the bullet-speed-enhanced buff during the battle.}}
+					
+\textcolor{red}{\sout{Output: Bullets shot by the player's tank gets a higher moving speed. The bullet-speed-enhanced buff disappears after the player's tank gets it.}}
+					
+\textcolor{red}{\sout{How test will be performed: After \underline{PVP} game starts, the bullets shot by corresponding player's tank should get a higher moving speed if the player controls the tank to get a wall-enhanced buff. The bullet-speed-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the speed of the bullet shot by the player's tank should go back to normal.}}
+
+\item{GR-GRB-6\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: The player gets the moving-speed-enhanced buff during the battle.
+					
+Output: The player's tank gets a higher speed after getting the moving-speed-enhanced buff. The moving-speed-enhanced buff disappear after the player's tank gets it.
+					
+How test will be performed: After \underline{PVE} game starts, the corresponding tank will get a higher speed after the player controls the tank to get the moving-speed-enhanced buff. The moving-speed-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the speed of the tank should go back to normal.
+
+\item{GR-GRB-7\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: The player gets the wall-enhanced buff during the battle.
+					
+Output: The player's home base is surrounded by iron walls instead of brick walls. The wall-enhanced buff disappears after the player's tank gets it.
+					
+How test will be performed: After \underline{PVE} game starts, the corresponding player's home base should get surrounded by iron walls if the player controls the tank to get a wall-enhanced buff. Iron walls can withstand any damages. The wall-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the home base will be surrounded by normal brick walls again.
+
+\item{GR-GRB-8\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts. 
+					
+Input: The player gets the bullet-speed-enhanced buff during the battle.
+					
+Output: Bullets shot by the player's tank gets a higher moving speed. The bullet-speed-enhanced buff disappears after the player's tank gets it.
+					
+How test will be performed: After \underline{PVE} game starts, the bullets shot by corresponding player's tank should get a higher moving speed if the player controls the tank to get a wall-enhanced buff. The bullet-speed-enhanced buff should disappears after the player's tank gets it. The buff should be available only for ten seconds. After ten seconds, the speed of the bullet shot by the player's tank should go back to normal.
+
+\end{enumerate}
+
+\paragraph{Test for General Rules about Lifes}
+
+\begin{enumerate}
+
+\item{GR-GRL-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts. 
+					
+Input: Player 1 controls the tank using "WASD" keys from the keyboard and drives the tank towards the bullet shot by the player 2's tank for three times. The bullet hits player 1's tank three times.
+					
+Output: Player 1's tank relives for the first and second time after hit by the bullet shot by player 2's tank. Player 1's tank does not relive after the third-time hit by the bullet.
+					
+How test will be performed: After \underline{PVP} game starts, player 1's tank could only relive twice if player 2's tank shoots bullets to the player 1's tank. When the bullet hit player 1's tank for the third time, player 1's tank should be directly destroyed and have no chance for relive.
+
+\item{GR-GRL-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 2 controls the tank using "WASD" keys from the keyboard and drives the tank towards the bullet shot by the player 1's tank for three times. The bullet hits player 2's tank three times.
+					
+Output: Player 2's tank relives for the first and second time after hit by the bullet shot by player 1's tank. Player 2's tank does not relive after the third-time hit by the bullet.
+					
+How test will be performed: After \underline{PVP} game starts, player 2's tank could only relive twice if player 1's tank shoots bullets to the player 2's tank. When the bullet hit player 2's tank for the third time, player 2's tank should be directly destroyed and have no chance for relive.
+
+\item{GR-GRL-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 controls the tank using "WASD" keys from the keyboard and drives the tank towards the bullet shot by the enemy tanks for three times. The bullet hits player 1's tank three times.
+					
+Output: Player 1's tank relives for the first and second time after hit by the bullet shot by enemy tanks. Player 1's tank does not relive after the third-time hit by the bullet.
+					
+How test will be performed: After \underline{PVE} game starts, player 1's tank could only relive twice if enemy tanks shoot bullets to the player 1's tank. When the bullet hit player 1's tank for the third time, player 1's tank should be directly destroyed and have no chance for relive.
+
+\item{GR-GRL-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 2 controls the tank using "WASD" keys from the keyboard and drives the tank towards the bullet shot by the enemy tanks for three times. The bullet hits player 2's tank three times.
+					
+Output: Player 2's tank relives for the first and second time after hit by the bullet shot by enemy tanks. Player 2's tank does not relive after the third-time hit by the bullet.
+					
+How test will be performed: After \underline{PVE} game starts, player 2's tank could only relive twice if enemy tanks shoot bullets to the player 2's tank. When the bullet hit player 2's tank for the third time, player 2's tank should be directly destroyed and have no chance for relive.
+
+\end{enumerate}
+
+\paragraph{Test for General Rules about Timing}
+
+\begin{enumerate}
+
+\item{GR-GRT-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVP} game successfully.
+					
+Output: Player 1 and player 2 participate a \underline{PVP} game for at most 3 minutes, if the two home bases are not destroyed and no player's tank is destroyed for 3 times.
+					
+How test will be performed: After \underline{PVP} game starts, both players should participate the game for at most 3 minutes if the two home bases are not destroyed and no player's tank is destroyed for 3 times. In other words, the game should keep running for 3 minutes if there is no event that can affect the result of the game happens during the gaming process.
+
+\item{GR-GRT-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVE} game successfully.
+					
+Output: Player 1 and player 2 participate a \underline{PVE} game for at most 3 minutes, if the home base is not destroyed and no player's tank is destroyed for 3 times.
+					
+How test will be performed: After \underline{PVE} game starts, both players should participate the game for at most 3 minutes if the home base is not destroyed and no player's tank is destroyed for 3 times. In other words, the game should keep running for 3 minutes if there is no event that can affect the result of the game happens during the gaming process.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVP} Rules}
+
+\begin{enumerate}
+
+\item{GR-PPR-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVP} game successfully.
+					
+Output: There are two home bases shown on the \underline{PVP} map located on the left and right hand side of the map.
+					
+How test will be performed: After \underline{PVP} game starts, the system should provide two home bases for the two players if they successfully Enter the \underline{PVP} mode. The home base is an element that can possibly affect the result of the game. 
+
+\item{GR-PPR-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 1 and player 2 play for 3 minutes. No tank is destroyed three times and no tank destroys the other player's home base during this time period.
+					
+Output: A "Tie" is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVP} game starts, the game should be considered as a tie if no tank is destroyed three times and no tank destroys the other player's home base in 3 minutes. The system should show the result on the screen.
+
+\item{GR-PPR-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 1's tank destroys player 2's tank three times during the 3-minute period.
+					
+Output: A "\textcolor{red}{Player 1 }Win" is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVP} game starts, the game should be considered as a win if player 1's tank destroys player 2's tank three times during the 3-minute period. In this case, player 1 can be considered as winning without destroying player 2's home base.
+
+\item{GR-PPR-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 2's tank destroys player 1's tank three times during the 3-minute period.
+					
+Output: A "\textcolor{red}{\sout{Lose} Player 2 Win}" is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVP} game starts, the game should be considered as a lose if player 2's tank destroys player 1's tank three times during the 3-minute period. In this case, player 2 can be considered as winning without destroying player 1's home base.
+
+\item{GR-PPR-5\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 2's tank destroys player 1's home base during the 3-minute period.
+					
+Output: A "\textcolor{red}{\sout{Lose} Player 2 Win}" is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVP} game starts, the game should be considered as a lose if player 2's tank destroys player 1's home base during the 3-minute period. In this case, player 2 can be considered as winning without destroying player 1's tank three times during the 3-minute period.
+
+\item{GR-PPR-6\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVP} game starts.
+					
+Input: Player 1's tank destroys player 2's home base during the 3-minute period.
+					
+Output: A "\textcolor{red}{Player 1}Win" is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVP} game starts, the game should be considered as a win if player 1's tank destroys player 2's home base during the 3-minute period. In this case, player 1 can be considered as winning without destroying player 2's tank three times during the 3-minute period.
+
+\end{enumerate}
+
+\paragraph{Test for \underline{PVE} Rules}
+
+\begin{enumerate}
+
+\item{GR-PER-1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVE} game successfully.
+					
+Output: There is one home base shown on the \underline{PVE} map located on the bottom of the \underline{PVE} map.
+					
+How test will be performed: After \underline{PVE} game starts, the system should provide one home base for the two players if they successfully Enter the \underline{PVE} mode. The home base is an element that can possibly affect the result of the game. 
+
+\item{GR-PER-2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVE} game successfully.
+					
+Output: There is 5 enemy tanks created on the \underline{PVE} map after the \underline{PVE} mode starts.
+					
+How test will be performed: After \underline{PVE} game starts, the system should provide five enemy tanks and show them in random locations of the map. 
+
+\item{GR-PER-3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVE} game successfully.
+					
+Output: Enemy tanks move by themselves. 
+					
+How test will be performed: After \underline{PVE} game starts, the system should allow the five enemy tanks to move automatically so that the player 1 and player 2 can distinguish the enemy tanks from their own tanks. The moving directions of enemy tanks are randomly chosen.
+
+\item{GR-PER-4\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 shoots a bullet to the enemy tank using "J" key from the keyboard. The bullet hits the enemy tank.
+					
+Output: Enemy tanks is destroyed by the bullet.
+					
+How test will be performed: After \underline{PVE} game starts, the enemy tank should be destroyed and disappeared if a bullet is shot by player 1's tank to the enemy tank using "J" key from the keyboard and hit the enemy tank. 
+
+\item{GR-PER-5\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 2 shoots a bullet to the enemy tank using "," key from the keyboard. The bullet hits the enemy tank.
+					
+Output: Enemy tanks is destroyed by the bullet.
+					
+How test will be performed: After \underline{PVE} game starts, the enemy tank should be destroyed and disappeared if a bullet is shot by player 2's tank to the enemy tank using "," key from the keyboard and hit the enemy tank. 
+
+\item{GR-PER-6\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Player 1 and player 2 Enter the \underline{PVE} game successfully.
+					
+Output: Enemy tanks shoot bullets automatically. 
+					
+How test will be performed: After \underline{PVE} game starts, the enemy tank should be able to shoot bullets automatically if player 1 and player 2 Enter the \underline{PVE} game successfully. The shooting frequency of enemy tanks should be random. The shooting direction of enemy tanks should be the same as the moving direction.
+
+\item{GR-PER-7\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: A enemy tank is destroyed.
+					
+Output: The enemy tank relives.
+					
+How test will be performed: After \underline{PVE} game starts, the enemy tank should be able to relive after it is destroyed by the players' tanks. Therefore the total number of enemy tanks should be 5 at all time.
+
+\textcolor{red}{Note: Since we do not have scoring mechanism, testing for scores will be redundant. Therefore we choose not to include any testing for scoring mechanism.}
+
+\item{GR-PER-8\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: Players' home base is destroyed by the bullet shot by an enemy tank during the 3-minute period.
+					
+Output: A ”Lose” is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVE} game starts, the game should be considered as a lose if the enemy tanks destroys the players' home base by shooting bullet in 3 minutes. In this case, enemy tanks can be considered as winning without destroying player 1's and player 2's tanks three times each during the 3-minute period.
+
+\item{GR-PER-9\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: After the \underline{PVE} game starts.
+					
+Input: The enemy tanks destroys player 1's and player 2's tanks three times each by using bullets during the 3-minute period.
+					
+Output: A ”Lose” is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVE} game starts, the game should be considered as a lose if the enemy tanks destroys player 1's and player 2's tanks three times each using bullets during the 3-minute period. In this case, enemy tanks can be considered as winning without destroying player 1 and player 2's home base during the 3-minute period.
+
+\item{GR-PER-10\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The \underline{PVE} game starts.
+					
+Input: Player  1  and  player  2  participate  the  \underline{PVE}  game  for  3 minutes. During the game, the home base is not destroyed and no player’s tank is destroyed for 3 times.
+					
+Output: A ”Win” is shown on the screen as the result of the game.
+					
+How test will be performed: After \underline{PVE} game starts, the game should be considered as a win if the home base is not destroyed and no player’s tank is destroyed for 3 times during the 3-minute period. 
+
+\end{enumerate}
+
+
+\subsection{Tests for Nonfunctional Requirements}
+\textcolor{red}{Note: The PVE and PVP mode are two different pygame systems. This is the reason why they have to be tested separately.}
+\subsubsection{Area of Testing1 for Look and Feel}
+		
+\paragraph{Test for Visual Appearance}
+
+\begin{enumerate}
+
+\item{LF-VA-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVE} game. 
+					
+Output/Result: The screen shows the game in a 2-D drawing style.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} are asked to evaluate the drawing style to identify whether the game drawing style is in 2-D.
+					
+\item{LF-VA-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVP} game. 
+					
+Output/Result: The screen shows the game in a 2-D drawing style.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} are asked to evaluate the drawing style to identify whether the game drawing style is in 2-D. 
+
+\item{LF-VA-3\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is installed on the computer.
+					
+Input/Condition: The game is just launched.
+					
+Output/Result: The screen shows the background of the game system in black.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see the background in black. 
+
+\item{LF-VA-4\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVE} game. 
+					
+Output/Result: The screen shows the brick walls and iron walls in a grid map.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see the brick walls and iron walls in a grid map.
+
+\item{LF-VA-5\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVP} game. 
+					
+Output/Result: The screen shows the brick walls and iron walls in a grid map.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see the brick walls and iron walls in a grid map.
+
+\item{LF-VA-6\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVE} game. 
+					
+Output/Result: The screen shows brick walls in orange and iron walls consisted of 4 iron cube in sliver, while the screen displays a home which looks like a eagle.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see brick walls in orange and iron walls consisted of 4 iron cube in sliver, while the screen displays a home which looks like a eagle.
+
+\item{LF-VA-7\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks. 
+					
+Input/Condition: Players start the \underline{PVP} game. 
+					
+Output/Result: The screen shows brick walls in orange and iron walls consisted of 4 iron cube in sliver, while the screen displays a home which looks like a eagle.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see brick walls in orange and iron walls consisted of 4 iron cube in sliver, while the screen displays a home which looks like a eagle. The test will be considered as success.
+
+\item{LF-VA-8\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode and the \underline{PVE} map is loaded.
+					
+Input/Condition:  The two players choose two different types of tanks among double-life tank, high-speed tank, double-bullet tank. Then the players start the \underline{PVE} game. 
+					
+Output/Result: The two different types of tanks show on the screen with different colours.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see the two different types of tanks on the screen with different colours. By repeating the above operation with different combination of the two types of tanks, the test should cover all possible conditions.
+
+\item{LF-VA-9\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks. 
+					
+Input/Condition: The two players choose two different types of tanks among double-life tank, high-speed tank, double-bullet tank. Then the players start the \underline{PVP} game. 
+					
+Output/Result: The two different types of tanks show on the screen with different colours.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} can see the two different types of tanks on the screen with different colours. By repeating the above operation with different combination of the two types of tanks, the test should cover all possible conditions.
+
+\item{LF-VA-10\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks.
+					
+Input/Condition: The players start the \underline{PVE} game. 
+					
+Output/Result: The drawing style of TankWar game is very similar to the drawing style of the original game ”Battle City”.
+					
+How test will be performed: By surveying 50 test users, 80 percent of the test users consider the drawing style of \textcolor{red}{\sout{TankWall} TankWar} shall be more than 90 percent similar with Battle City.
+
+\item{LF-VA-11\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks.
+					
+Input/Condition: Players start the \underline{PVP} game. 
+					
+Output/Result: The drawing style of TankWar game is very similar to the drawing style of the original game ”Battle City”.
+					
+How test will be performed: By surveying 50 test users, 80 percent of the test users consider the drawing style of \textcolor{red}{\sout{TankWall} TankWar} shall be more than 90 percent similar with Battle City.
+
+\end{enumerate}
+
+
+
+\subsubsection{Area of Testing2 for Usability and Humanity}
+\paragraph{Test for Ease of Use}
+
+\begin{enumerate}
+
+\item{UH-EU-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded.
+					
+Input/Condition: The players start to choose tanks.
+					
+Output/Result: The screen displays the photos and descriptions of different types of tanks to give a brief introduction when users are choosing tanks.
+					
+How test will be performed: When the software  \textcolor{red}{\sout{developer} tester} are choosing tanks, there are the photos and descriptions are displayed on the screen.
+
+\item{UH-EU-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded \textcolor{red}{\sout{and the players have chose tanks}}.
+					
+Input/Condition: The players start to choose tanks.
+					
+Output/Result: The screen displays the photos and descriptions of different types of tanks to give a brief introduction when users are choosing tanks.
+					
+How test will be performed: When the software  \textcolor{red}{\sout{developer} tester} are choosing tanks, there are the photos and descriptions are displayed on the screen.
+
+\item{UH-EU-3\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks.
+					
+Input/Condition: The players press "Enter" key to start the \underline{PVE} game. 
+					
+Output/Result: The rules of the game are displayed \textcolor{red}{\sout{for 3 seconds, then} on the screen. If the players press the key "Enter",} the game \textcolor{red}{\sout{starts} will start}.
+					
+How test will be performed: After the software  \textcolor{red}{\sout{developer} tester} press "Enter" key to start the \underline{PVE} game, the rules of the game are displayed \textcolor{red}{\sout{for 3 seconds.} The users press the key "Enter".} Then, the game starts.
+
+\item{UH-EU-4\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks.
+					
+Input/Condition: The players press "Enter" key to start the \underline{PVP} game. 
+					
+Output/Result: The rules of the game are displayed \textcolor{red}{\sout{for 3 seconds, then} on the screen. If the players press the key "Enter",} the game \textcolor{red}{\sout{starts} will start}.
+					
+How test will be performed: After the software  \textcolor{red}{\sout{developer} tester} press "Enter" key to start the \underline{PVP} game, the rules of the game are displayed \textcolor{red}{\sout{for 3 seconds.} The users press the key "Enter".} Then, the game starts.
+\end{enumerate}
+
+\paragraph{Test for Learning and Understandability}
+
+\begin{enumerate}
+\item{UH-LU-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVE} mode. \underline{PVE} map is loaded and the players have chose tanks. 
+					
+Input/Condition: The players press "Enter" key to start the \underline{PVE} game. The players read the rules of the game and operation instruction displayed on the screen \textcolor{red}{\sout{for 3 seconds}}, then the game starts.
+					
+Output/Result: The players who are above 12 years old and have basic computer operation knowledge know how to play the game after read the rules and instruction.
+					
+How test will be performed: After the player read the rules of \underline{PVE} and operation instruction, the players should have a basic knowledge. By surveying 50 test players who are above 12 years old and have basic computer operation knowledge, 80 percent of the test players knows how to play the game after read the rules and instruction.
+
+\item{UH-LU-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is at \underline{PVP} mode. \underline{PVP} map is loaded and the players have chose tanks.
+
+Input/Condition: The players press "Enter" key to start the \underline{PVP} game. The players read the rules of the game and operation instruction displayed on the screen \textcolor{red}{\sout{for 3 seconds}}, then the game starts.
+					
+Output/Result: The players who are above 12 years old and have basic computer operation knowledge know how to play the game after read the rules and instruction.
+					
+How test will be performed: After the player read the rules of \underline{PVP} and operation instruction, the players should have a basic knowledge. By surveying 50 test players who are above 12 years old and have basic computer operation knowledge, 80 percent of the test players knows how to play the game after read the rules and instruction.
+
+\item{UH-LU-3\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is just launched on the computer. 
+					
+Input/Condition: The players choose one of the 3 modes including \underline{PVP}, \underline{PVE}, map editing mode.
+					
+Output/Result: The players above 12 years old with basic computer operation knowledge would consider the words and icons showed on the screen are easily understandable.
+					
+How test will be performed: By surveying 50 test players who are above 12 years old and have basic computer operation knowledge, 80 percent of the test players would consider the words and icons showed on the screen are easily understandable.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing3 for Performance}
+\paragraph{Test for Speed and Latency}
+
+\begin{enumerate}
+
+\item{PT-SL-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is just launched and the game system is presented on the screen.
+					
+Input/Condition: The players could perform any operations in the game system.
+					
+Output/Result: The system shall respond to a user operation input less than 100 milliseconds.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} will use the python time library to calculate the response time of an operation. When the players start performing the operations until the responds been made by the system, the respond time is counted. The system respond time is less than 100 milliseconds.
+
+\item{PT-SL-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in map editing mode and the player has created their own map.
+					
+Input/Condition: The player presses "Enter" key to save the map and names the map. Then the player presses "Enter" key again to start saving process.
+					
+Output/Result: The system shall take less than 5 second to save a map on the local disk.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} will use the python time library to calculate the time for saving a map. The time for saving a map is less than 5 second.
+
+\item{PT-SL-3\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the \underline{PVP} mode. 
+					
+Input/Condition: The player chooses the map to be loaded.
+					
+Output/Result: The system take less than 5 second to load the \underline{PVP} map from local disk.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} will use the python time library to calculate the time for loading a \underline{PVP} map. The time for loading a \underline{PVP} map is less than 5 second.
+
+\item{PT-SL-4\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the \underline{PVE} mode. 
+					
+Input/Condition: The player chooses the map to be loaded.
+					
+Output/Result: The system take less than 5 second to load the \underline{PVE} map from local disk.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} will use the python time library to calculate the time for loading a \underline{PVE} map. The time for loading a \underline{PVE} map is less than 5 second.
+
+\end{enumerate}
+
+\paragraph{Test for Accuracy}
+
+\begin{enumerate}
+
+\item{PT-AT-1\\}
+
+Type: Manual, static, structural
+					
+Initial State: The game code is functional and is implemented in python.
+					
+Input/Condition: There are floating point numbers used in the code.
+					
+Output/Result: Floating point numbers used in the code is in double precision.
+					
+How test will be performed: The floating point numbers in the source code is in the standard floating point number data type of python.
+
+\end{enumerate}
+
+\paragraph{Test for Reliability and Availability}
+
+\begin{enumerate}
+
+\item{PT-RA-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is launched.
+					
+Input/Condition: The two players are both engaged in the game.
+					
+Output/Result: The system crashes do not exceed 3 times within 6-hour constantly running.
+					
+How test will be performed: By starting a test, 10 TankWar games are constantly played by 20 test players in group of 2 for 6 hour, while crashing happens less than 3 time each game.
+
+\item{PT-RA-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the local computer. The system is installed python and pygame.
+					
+Input/Condition: The game is launched on the flowing operating system including Windows 7, Windows 8, Windows 10, Mac OS 10.8+, and Linux.
+					
+Output/Result: The game is able to run on \textcolor{red}{\sout{Windows 7, Windows 8, }}Windows 10, Mac OS 10.8, and Linux.
+					
+How test will be performed: The game will be installed on the computers with the specified operating systems respectively. Then, the game will be tested to determine whether the game is fully functional on each operating system.
+
+\end{enumerate}
+
+\paragraph{Test for Robustness}
+
+\begin{enumerate}
+
+
+\item{PT-RT-1\\}
+
+\textcolor{red}{Type: Functional, Dynamic, Manual.}
+					
+\textcolor{red}{Initial State: The game is launched.}
+					
+\textcolor{red}{Input: The keys besides the desired input keys mentioned in the functional requirements are triggered.}
+					
+\textcolor{red}{Output: The program would ignore the undesired game input and only identify the desired input keys.}
+					
+\textcolor{red}{How test will be performed: In each screen, the three testers randomly press 100 input keys other than the desired input keys. If the game performs any action, the test is considered as fail. If no action is performed, the test is considered as pass.}\\
+
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: The player is in map editing mode and a map is created.}}
+					
+\textcolor{red}{\sout{Input: Press the "Enter" key, then Enter an existing file name and press "Enter" key again.}}
+					
+\textcolor{red}{\sout{Output: The program prompts the user and says "File Already Exist".}}
+					
+\textcolor{red}{\sout{How test will be performed: Create a map in map editing mode, then press "Enter" key and Enter the file name. Press the "Enter" again and check if the program prompts the users and says "File Already Exist".}}
+
+\item{\textcolor{red}{\sout{PT-RT-2}}\\}
+
+\textcolor{red}{\sout{Type: Functional, Dynamic, Manual.}}
+					
+\textcolor{red}{\sout{Initial State: The player is in map editing mode and a map is created.}}
+					
+\textcolor{red}{\sout{Input: Press the "Enter" key, then Enter an existing file name and press "Enter" key again.}}
+					
+\textcolor{red}{\sout{Output: The program prompts the user and says "File Already Exist".}}
+					
+\textcolor{red}{\sout{How test will be performed: Create a map in map editing mode, then press "Enter" key and Enter the file name. Press the "Enter" again and check if the program prompts the users and says "File Already Exist".}}
+
+
+\end{enumerate}
+
+\paragraph{Test for Capacity}
+
+\begin{enumerate}
+
+\item{PT-CT-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the \underline{PVE} mode. The \underline{PVE} map is loaded and the players has chosen their tanks.
+					
+Input/Condition: The \underline{PVE} game is started and two players both perform their operation to the tanks at the same time. 
+					
+Output/Result: The game is able to support the two players' operations at the same time.
+					
+How test will be performed: The two players both perform their operation to the tanks at the same time. The game is able to support the two players' operations at the same time.
+
+\item{PT-CT-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the \underline{PVP} mode. The \underline{PVP} map is loaded and the players has chosen their tanks.
+					
+Input/Condition: The \underline{PVP} game is started and two players both perform their operation to the tanks at the same time. 
+					
+Output/Result: The game is able to support the two players' operations at the same time.
+					
+How test will be performed: The two players both perform their operation to the tanks at the same time. The game is able to support the two players' operations at the same time.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing4 for Operational and Environmental}
+\paragraph{Test for Physical Environment}
+
+\begin{enumerate}
+
+\item{OE-PE-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is installed on the computer with 2-cores processor and 1GB RAM. Python and pygame is intalled too.
+
+Input/Condition: The players launch and play the game.
+					
+Output/Result: The game is fully functional on the computer.
+					
+How test will be performed: The players play the \underline{PVE} and \underline{PVP} games and the game is fully functional.
+
+\end{enumerate}
+
+\paragraph{Test for Productization and Release}
+
+\begin{enumerate}
+
+\item{OE-PR-1\\}
+
+Type: Manual, functional
+					
+Initial State: The game is fully functional and is developed well.
+
+Input/Condition: The product is in the delivery state.
+					
+Output/Result: The product is wrap up as a file package and can be easily downloaded from Git Lab as an open source project.
+					
+How test will be performed: The product is in a file package and can be easily downloaded from Git Lab as an open source project.
+
+\item{OE-PR-2\\}
+
+Type: Manual, static, structural
+					
+Initial State: The game is developed and before releasing.
+
+Input/Condition: The game is in the testing process.
+					
+Output/Result: The system is released after full verifying and validation.
+					
+How test will be performed: The test developer conducts an inspection followed by the requirements specification and test plan to fully verify and validate the game.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing5 for Maintainability and Support}
+\paragraph{Test for Supportability}
+
+\begin{enumerate}
+
+\item{MS-ST-1\\}
+
+Type: Manual, static, structural
+					
+Initial State: The project state is in the software development process and code implementation.
+					
+Input/Condition: The naming convention is needed in the software development. The variables in the code need to be created in the code implementation.
+					
+Output/Result: The naming convention of the variables and development process are consistent.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} would conduct a inspection on the code and development documentation to check the naming consistence.
+
+\item{MS-ST-2\\}
+
+Type: Manual, static, structural
+					
+Initial State: The code of the game is implementing.
+					
+Input/Condition: The software developer is implementing the code.
+					
+Output/Result: The code implementation include the comments that generates Doxygen documentation.
+					
+How test will be performed: The Doxygen documentation is generated and have all the important information about the functions, calls, and variables.
+
+\end{enumerate}
+
+\subsubsection{Area of Testing6 for Security}
+\paragraph{Test for Integrity and Privacy}
+
+\begin{enumerate}
+
+\item{ST-IP-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is in the map editing mode. The map is created.
+					
+Input/Condition: The players try to save the map.
+					
+Output/Result: The map is safely saved on the local disk and there is no loss of the information of the map.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} would design and save 10 maps in either \underline{PVE} and \underline{PVP} map creation. The maps saved on the local disk should have the information as the software  \textcolor{red}{\sout{developer} tester} design and there is no information loss.
+
+\item{ST-IP-2\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is developed well.
+					
+Input/Condition: The game is in testing process.
+					
+Output/Result: There is no any mechanism to save personal information from users.
+					
+How test will be performed: The software \textcolor{red}{\sout{developers} testers} would conduct a walk-through on the code to exam whether there is mechanism to collect any personal information from users. 
+
+
+\end{enumerate}
+
+\subsubsection{Area of Testing7 for Cultural}
+\paragraph{Test for Cultural}
+
+\begin{enumerate}
+
+\item{CT-CT-1\\}
+
+Type: Manual, dynamic, functional
+					
+Initial State: The game is developed well and fully functional.
+					
+Input/Condition: The game is in the testing process.
+					
+Output/Result: The game system is in English with Canadian spelling. The game does not contain any content that could be considered offensive.
+					
+How test will be performed: The software  \textcolor{red}{\sout{developer} tester} would conduct a walk-through on the code to check the language and spelling to make sure no offensive contents in the game.
+
+\end{enumerate}
+\newpage
+\subsection{Traceability Between Test Cases and Requirements}
+
+The traceability between test cases and requirement is presented in the following two table, including Table 4: Taceability Matrix for Functional Requirement, and and Table 5: Taceability Matrix for Non-functional Requirement.
+
+\begin{table}[h]
+\begin{tabular}{|p{3cm}|p{3cm}|p{7cm}|}
+ \hline
+ Functional Requirement ID & Priority & Test Case ID\\
+ \hline
+ FR1 & 5 & \makecell[l]{GPT-PPMS-1, GPT-PEMS-1,\\ GPT-MEMS-1}\\ 
+ \hline
+ FR2 & 5 & \makecell[l]{ME-PVPAB-1, ME-PVPAB-2,\\ ME-PVPAB-3, ME-PVPAB-4,\\ ME-PVPAI-1, ME-PVPAI-2,\\ ME-PVPAI-3, ME-PVPAI-4,\\ ME-PVPDW-1, ME-PVPDW-2,\\ ME-PVPDW-3, ME-PVEAB-1,\\ ME-PVEAB-2, ME-PVEAB-3,\\ ME-PVEAB-4, ME-PVEAI-1,\\ ME-PVEAI-2, ME-PVEAI-3,\\ ME-PVEAI-4, ME-PVEDW-1,\\ ME-PVEDW-2, ME-PVEDW-3}\\
+ \hline
+ FR3 & 4 & ME-PVPSM-1, ME-PVESM-1\\
+ \hline
+ FR4 & 5 & \makecell[l]{MT-GU-1, MT-GU-2, MT-GU-3,\\ MT-GU-4, MT-GU-5, MT-GU-6,\\ MT-GU-7, MT-GU-8, MT-GD-1,\\ MT-GD-2, MT-GD-3, MT-GD-4,\\ MT-GD-5, MT-GD-6, MT-GD-7,\\ MT-GD-8, MT-GL-1, MT-GL-2,\\ MT-GL-3, MT-GL-4, MT-GL-5,\\ MT-GL-6, MT-GL-7, MT-GL-8,\\ MT-GR-1, MT-GR-2, MT-GR-3,\\ MT-GR-4, MT-GR-5, MT-GR-6,\\ MT-GR-7, MT-GR-8.}\\
+ \hline
+FR5 & 5 & \makecell[l]{TAT-UUS-1, TAT-UUS-2,\\ TAT-UUS-3, TAT-UUS-4}\\
+\hline
+ \end{tabular}
+\end{table}
+\begin{table}[h]
+\begin{tabular}{|p{3cm}|p{3cm}|p{7cm}|}
+ \hline
+ Functional Requirement ID & Priority & Test Case ID\\
+ 
+ 
+  \hline
+ FR6 & 5 & \makecell[l]{TAT-SB-1, TAT-SB-2, TAT-SB-3,\\ TAT-SB-4, TAT-SB-5, TAT-SB-6,\\ TAT-SB-7, TAT-SB-8}\\
+  \hline
+ FR7 & 5 & \makecell[l]{GR-GRW-1, GR-GRW-2, GR-GRW-3,\\ GR-GRW-4}\\
+  \hline
+  FR8 & 5 & \makecell[l]{GR-GRW-5, GR-GRW-6, GR-GRW-7,\\ GR-GRW-8}\\
+ \hline
+ FR9 & 5 & \makecell[l]{MT-WB-1, MT-WB-2, MT-WB-3,\\MT-WB-4, MT-WB-5, MT-WB-6}\\
+  \hline
+ FR10 & 5 & \makecell[l]{GPT-PPTS-1, GPT-PPTS-2,\\ GPT-PETS-1, GPT-PETS-2}\\
+  \hline
+ FR11 & 5 & \makecell[l]{GR-PPR-2, GR-PPR-3, \\GR-PPR-4, GR-PPR-5, \\GR-PPR-6, GR-PER-8, \\GR-PER-9, GR-PER-10}\\
+  \hline
+ FR12 & 5 & \makecell[l]{\textcolor{red}{\sout{GR-GRB-1}}, GR-GRB-2, \\\textcolor{red}{\sout{GR-GRB-3, GR-GRB-4,}} \\\textcolor{red}{\sout{GR-GRB-5}}, GR-GRB-6, \\GR-GRB-7, GR-GRB-8}\\
+  \hline
+ FR13 & 5 & GR-PER-3\\
+  \hline
+ FR14 & 5 & GR-PER-4, GR-PER-5\\
+  \hline
+ FR15 & 5 & GR-PER-7\\
+  \hline
+ FR16 & 5 & GR-PER-2, GR-PER-7\\
+  \hline
+ FR17 & 5 & GR-PER-1\\
+  \hline
+ FR18 & 5 & GR-PPR-1\\
+  \hline
+ FR19 & 5 & \makecell[l]{GR-PER-8, GR-PER-9, \\GR-PER-10}\\
+  \hline
+ FR20 & 5 & \makecell[l]{GR-PPR-2, GR-PPR-3, \\GR-PPR-4, GR-PPR-5, \\GR-PPR-6}\\
+  \hline
+ FR21 & 5 & \makecell[l]{GR-GRL-1, GR-GRL-2, \\GR-GRL-3, GR-GRL-4}\\
+  \hline
+\end{tabular}
+\caption{Taceability Matrix for Functional Requirement}
+\label{table: Taceability Matrix for Functional Requirement}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{|p{3cm}|p{3cm}|p{7cm}|}
+ \hline
+ Non-Functional Requirement ID & Priority & Test Case ID\\ 
+ \hline
+ LF1 & 5 & LF-VA-1, LF-VA-2\\ 
+ \hline
+ LF2 & 5 & LF-VA-3\\ 
+ \hline
+ LF3 & 4 & LF-VA-4, LF-VA-5\\
+ \hline
+ LF4 & 5 & LF-VA-6, LF-VA-7\\
+ \hline
+ LF5 & 5 & LF-VA-6, LF-VA-7\\
+  \hline
+ LF6 & 5 & LF-VA-8, LF-VA-9\\
+  \hline
+ LF7 & 5 & LF-VA-6, LF-VA-7\\
+  \hline
+ LF8 & 5 & LF-VA-10, LF-VA-11\\
+  \hline
+ UH1 & 5 & UH-EU-1, UH-EU-2\\
+  \hline
+ UH2 & 5 & UH-EU-3, UH-EU-4\\
+  \hline
+ UH4 & 5 & UH-LU-1, UH-LU-2\\
+  \hline
+ UH5 & 5 & UH-LU-3\\
+  \hline
+ PR1 & 5 & PT-SL-1\\
+  \hline
+ PR2 & 5 & \makecell[l]{PT-SL-2, PT-SL-3, PT-SL-4}\\
+  \hline
+ PR4 & 5 & PT-AT-1\\
+  \hline
+ PR5 & 5 & PT-RA-1\\
+  \hline
+ PR6 & 5 & PT-RA-2\\
+  \hline
+ PR7 & 5 & PT-RT-1.  \textcolor{red}{\sout{PT-RT-2}}\\
+  \hline
+ PR8 & 5 & PT-CT-1, PT-CT-2\\
+  \hline
+ OE1 & 5 & OE-PE-1\\
+  \hline
+ OE3 & 5 & OE-PR-1\\
+  \hline
+ OE4 & 5 & OE-PR-1\\
+  \hline
+ OE5 & 5 & OE-PR-2\\
+  \hline
+ MS2 & 5 & MS-ST-1\\
+  \hline
+ MS3 & 5 & MS-ST-2\\
+  \hline
+ MS4 & 5 & PT-RA-2\\
+  \hline
+ SR2 & 5 & ST-IP-1\\
+  \hline
+ SR3 & 5 & ST-TP-2\\
+  \hline
+ CR1 & 5 & CT-CT-1\\
+  \hline
+ CR2 & 5 & CT-CT-1\\
+  \hline
+ 
+\end{tabular}
+\caption{Taceability Matrix for Non-functional Requirement}
+\label{table: Taceability Matrix for Non-functional Requirement}
+\end{table}
+
+
+
+\section{Tests for Proof of Concept}
+
+\subsection{Area of Testing1 for Map Saving}
+		
+\paragraph{Map Match Verification}
+
+\begin{enumerate}
+\item{MS-MV-1}
+
+Type : Functional, Static, Automated.
+
+Initial State: A map is designed follow a certain known map file and saved in the map editing mode.
+
+Input: The saved file for the map.
+
+Output: A Boolean value stands for the equality between the saved map file and the known map file.
+
+How test will be performed: After designing and saving a map which means to be the same as a certain known map file, write a unit test function to compare the two files and check if the test passes.
+
+\item{MS-MV-2}
+
+Type : Functional, Dynamic, Manual.
+
+Initial State: A map is designed follow a certain known map and saved in the map editing mode.
+
+Input: Load the saved map at the process of loading map.
+
+Output: The \underline{GUI} shows the saved map.
+
+How test will be performed: After designing and saving a map which means to be the same as a certain known map, loading the map to the game and check if the screen shows the expected map.
+
+\end{enumerate}
+
+\subsection{Area of Testing2 for the Test coverage}
+
+\paragraph{Test the coverage of the tests}
+
+\begin{enumerate}
+
+\item{TC-TC-1}
+
+Type: Functional, Static, Manual.
+					
+Initial State: A finished test plan.
+					
+Input: All the group members inspect the test plan.
+					
+Output: The test plan covers all the requirements \textcolor{red}{and the code coverage should be at least 80 percent}.
+					
+How test will be performed: After the test plan is finished, all the three group members will inspect the document, and check if it covers all the requirements in \underline{SRS} \textcolor{red}{and also to see if the code coverage is satisfied}.
+
+\end{enumerate}
+
+\subsection{Area of Testing3 for the User Acceptance}
+
+\paragraph{Test the user acceptance}
+
+\begin{enumerate}
+
+\item{UA-UA-1}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: A running new game.
+					
+Input: Let the sample users try this new game.
+					
+Output: The acceptance of the game from the sample users.
+					
+How test will be performed: After the game is correctly running, \sout{\textcolor{red}{some}} \textcolor{red}{50} sample users \textcolor{red}{who are above 12 years old} will be invited to try this game and ask them to finish a survey designed for the acceptance. The test will pass if the user acceptance is higher than 80 percent.
+
+\end{enumerate}
+
+\section{Comparison to Existing Implementation}	
+None.
+\section{Unit Testing Plan}
+		
+\subsection{Unit testing of internal functions}
+Python unittest will be used to test the internal functions. To finish the test, several inputs which mean to cover all the cases will be designed for each requirement, and the outputs will be compared with the expected outputs to see if the requirements are met.\\
+
+\begin{enumerate}
+
+\item{\textcolor{red}{Test Name: UBT-SS-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: A bullet object is created.}
+
+\textcolor{red}{Input: An integer represents the bullet's speed.}
+
+\textcolor{red}{The bullet's speed is changed to the input integer.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UBT-SL-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: A bullet object is created.}
+
+\textcolor{red}{Input: A boolean value represents the bullet's life.}
+
+\textcolor{red}{Output: The bullet's life is changed to the boolean value.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UBT-SST-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: A bullet object is created.}
+
+\textcolor{red}{Input: A boolean value represents that the bullet is strong or not.}
+
+\textcolor{red}{Output: The bullet's value of strong is changed to the boolean value.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UDT-INIT-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: A prepared decTime module.}
+
+\textcolor{red}{Input: Create a decTime object with an input integer represents the number of seconds.}
+
+\textcolor{red}{Output: The number of seconds are changed into the form of hours:minutes:seconds.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UFD-CH-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: A food object is created.}
+
+\textcolor{red}{Input: Call the function change.}
+
+\textcolor{red}{Output: The value of life is changed to True.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UET-ST-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An EnemyTank object is created.}
+
+\textcolor{red}{Input: Call the function shoot.}
+
+\textcolor{red}{Output: The value of the tank's bullet's life is changed to True.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UMT-ST-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An MyTank object is created.}
+
+\textcolor{red}{Input: Call the function shoot.}
+
+\textcolor{red}{Output: The value of the tank's bullet's life is changed to True.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UMT-LU-1 \& UMT-LU-2}}
+
+\textcolor{red}{Description: These two tests are similar. The first one is to increase the level by one, and the second one is to test when the level is already maximized.}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An MyTank object is created.}
+
+\textcolor{red}{Input: Call the function levelup.}
+
+\textcolor{red}{Output: Nothing is changed if tank's level is 2, otherwise the level is increased by 1.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UMT-LD-1 \& UMT-LD-2}}
+
+\textcolor{red}{Description: These two tests are similar. The first one is to decrease the level by one, and the second one is to test when the level is already minimized.}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An MyTank object is created.}
+
+\textcolor{red}{Input: Call the function leveldown.}
+
+\textcolor{red}{Output: Nothing is changed if tank's level is 0, otherwise the level is decreased by 1, and if the level is decreased to 0, the tank's speed is changed to 6 and the bullet's value of strong is changed to False.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UDT-BPS-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An doubleLifeTank object is created.}
+
+\textcolor{red}{Input: Call the function bulletproof\_start.}
+
+\textcolor{red}{Output: The value of the bullet proof is changed to True.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UDT-BPE-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An doubleLifeTank object is created.}
+
+\textcolor{red}{Input: Call the function bulletproof\_end.}
+
+\textcolor{red}{Output: The value of the bullet proof is changed to False.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UDT-GBP-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An doubleLifeTank object is created.}
+
+\textcolor{red}{Input: Call the function get\_bullet\_proof.}
+
+\textcolor{red}{Output: The value of the bullet proof is returned.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UFT-DB-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An fastBulletTank object is created.}
+
+\textcolor{red}{Input: Call the function double\_bullet.}
+
+\textcolor{red}{Output: The two bullets' life are both changed to True.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UHT-LS-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An highSpeedTank object is created.}
+
+\textcolor{red}{Input: Call the function leap\_start.}
+
+\textcolor{red}{Output: The tank's speed is increased by 3.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+
+\item{\textcolor{red}{Test Name: UHT-LE-1}}
+
+\textcolor{red}{Type : Functional, Static, Automated.}
+
+\textcolor{red}{Initial State: An highSpeedTank object is created.}
+
+\textcolor{red}{Input: Call the function leap\_end.}
+
+\textcolor{red}{Output: The tank's speed is changed to 3.}
+
+\textcolor{red}{How test will be performed: A unit test case will be wrote to compare the output with the expected output, and the test will pass if they are equivalent.}\\
+\end{enumerate}
+
+\subsection{Unit testing of output files}		
+The outputs of our project include the saved maps designed by the players and the \underline{GUI} of the game. The saved maps will be tested by writing a unit test function to compare the saved map file with the expected map file to see if they are equivalent. For the \underline{GUI} part, it will be difficult to do the automated testing so that manual tests will be applied to check if the \underline{GUI} shows the right thing.
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}
+
+\subsection{Symbolic Parameters}
+
+None.
+
+\subsection{Usability Survey Questions?}
+
+\begin{enumerate}
+\item After reading the rules of \underline{PVE} game and the operation instruction, do you know how to control a tank?\\\\
+a. Yes\\
+b. No
+
+\item After reading the rules of \underline{PVE} game and the operation instruction, do you know how to win the \underline{PVE} game?\\\\
+a. Yes\\
+b. No
+
+\item After reading the rules of \underline{PVE} game and the operation instruction, \textcolor{red}{\sout{how much parentage that you can understand} how much percentage do you understand} the rules of the \underline{PVE} game?\\\\
+a. 0\%\\
+b. 20\%\\
+c. 40\%\\
+d. 60\%\\
+e. 80\%\\
+f. 100\%\\
+
+\item After reading the rules of \underline{PVP} game and the operation instruction, do you know how to control a tank?\\\\
+a. Yes\\
+b. No
+
+\item After reading the rules of \underline{PVP} game and the operation instruction, do you know how to win the \underline{PVP} game?\\\\
+a. Yes\\
+b. No
+
+\item After reading the rules of \underline{PVP} game and the operation instruction, \textcolor{red}{\sout{how much parentage that you can understand} how much percentage do you understand} the rules of the \underline{PVP} game?\\\\
+a. 0\%\\
+b. 20\%\\
+c. 40\%\\
+d. 60\%\\
+e. 80\%\\
+f. 100\%\\
+
+\item \textcolor{red}{\sout{For the words and icons showed in the game, how much percentage that you think that} How much percentage do you understand the words and icons showed in the game?}\\\\
+a. 0\%\\
+b. 20\%\\
+c. 40\%\\
+d. 60\%\\
+e. 80\%\\
+f. 100\%\\
+
+\item \textcolor{red}{\sout{How much parentage that you can understand} How much percentage would you} consider that it is easy to play the game?\\\\
+a. 0\%\\
+b. 20\%\\
+c. 40\%\\
+d. 60\%\\
+e. 80\%\\
+f. 100\%\\
+
+\item \textcolor{red}{How much parentage would you consider that the drawing style of TankWar is similar to the original game Battle City?}\\\\
+\textcolor{red}{a. 0\%\\}
+\textcolor{red}{b. 20\%\\}
+\textcolor{red}{c. 40\%\\}
+\textcolor{red}{d. 60\%\\}
+\textcolor{red}{e. 80\%\\}
+\textcolor{red}{f. 100\%\\}
+
+
+\end{enumerate}
+
+\end{document}

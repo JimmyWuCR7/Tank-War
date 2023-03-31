@@ -1,0 +1,76 @@
+\hypertarget{classdec_time_1_1dec_time}{}\section{dec\+Time.\+dec\+Time Class Reference}
+\label{classdec_time_1_1dec_time}\index{decTime.decTime@{decTime.decTime}}
+
+
+declining time in the game.  
+
+
+Inheritance diagram for dec\+Time.\+dec\+Time\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdec_time_1_1dec_time}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdec_time_1_1dec_time_a347077af854df5ad2e55078cab68c0cd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, total)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classdec_time_1_1dec_time}{dec\+Time}}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdec_time_1_1dec_time_abc74b9f7ad93fd128906664aedc18979}{sub\+Time}} (self)
+\begin{DoxyCompactList}\small\item\em Make the time decline during the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdec_time_1_1dec_time_a712a9bc7e0229d855831f4d39d456246}\label{classdec_time_1_1dec_time_a712a9bc7e0229d855831f4d39d456246}} 
+{\bfseries second}
+\item 
+\mbox{\Hypertarget{classdec_time_1_1dec_time_abc6db2a2eb048e05367533a2a03dcc0d}\label{classdec_time_1_1dec_time_abc6db2a2eb048e05367533a2a03dcc0d}} 
+{\bfseries hour}
+\item 
+\mbox{\Hypertarget{classdec_time_1_1dec_time_a954e2cc6939da44283c8afa07275c8b5}\label{classdec_time_1_1dec_time_a954e2cc6939da44283c8afa07275c8b5}} 
+{\bfseries minute}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+declining time in the game. 
+
+This class sets up the time duration of the game, it initialize the total time of the game, make it decline and return zero when the remaning time is zero. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdec_time_1_1dec_time_a347077af854df5ad2e55078cab68c0cd}\label{classdec_time_1_1dec_time_a347077af854df5ad2e55078cab68c0cd}} 
+\index{decTime.decTime@{decTime.decTime}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!decTime.decTime@{decTime.decTime}}
+\subsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dec\+Time.\+dec\+Time.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{total }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classdec_time_1_1dec_time}{dec\+Time}}. 
+
+Constructor initialize the \mbox{\hyperlink{classdec_time_1_1dec_time}{dec\+Time}} and turns the total seconds into the hours\+:minutes\+:seconds. 
+\begin{DoxyParams}{Parameters}
+{\em total\+Time} & represents the total time of the game in seconds. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdec_time_1_1dec_time_abc74b9f7ad93fd128906664aedc18979}\label{classdec_time_1_1dec_time_abc74b9f7ad93fd128906664aedc18979}} 
+\index{decTime.decTime@{decTime.decTime}!subTime@{subTime}}
+\index{subTime@{subTime}!decTime.decTime@{decTime.decTime}}
+\subsubsection{\texorpdfstring{subTime()}{subTime()}}
+{\footnotesize\ttfamily def dec\+Time.\+dec\+Time.\+sub\+Time (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Make the time decline during the game. 
+
+\begin{DoxyReturn}{Returns}
+0 means end the game when time is over. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{dec_time_8py}{dec\+Time.\+py}}\end{DoxyCompactItemize}
